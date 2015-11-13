@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Welcome to CodeIgniter</title>
+    <title>Welcome to Douban Website</title>
 
     <style type="text/css">
 
@@ -74,13 +74,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-    <h1>Welcome to Lyu CodeIgniter!</h1>
+    <h1>Welcome to Douban Website</h1>
 
     <div id="body">
-        <p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+        <p>This is a Prototype of a Real Estate Information Website</p>
 
-        <p>If you would like to edit this page you'll find it located at:</p>
-        <code>application/views/welcome_message.php</code>
+        <p>Please Login or Register here</p>
+        <form name="login" method="post" action="home.php">
+            Username:   <input type="text" name="user" size=20>
+            Password:   <input type="password" name="pwd" size="20">
+            <input type="submit" name="Login">
+        </form>
 
         <p>The corresponding controller for this page is found at:</p>
         <code>application/controllers/Welcome.php</code>
@@ -90,6 +94,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
+
+<?php
+echo $_POST["user"];
+echo $_POST["pwd"];
+?>
 
 </body>
 </html>
