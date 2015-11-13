@@ -79,26 +79,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="body">
         <p>This is a Prototype of a Real Estate Information Website</p>
 
-        <p>Please Login or Register here</p>
+        <p>Please LOGIN here</p>
         <form name="login" method="post">
             Username:   <input type="text" name="user" size=20>
             Password:   <input type="password" name="pwd" size="20">
             <input type="submit" name="Login">
         </form>
 
-        <p>The corresponding controller for this page is found at:</p>
-        <code>application/controllers/Welcome.php</code>
+        <p>If you don't have an account, please REGISTER here</p>
+        <button type="button" href="www.google.com">Register</button>
 
-        <p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
     </div>
 
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
-
-<?php
-    echo $_POST[user];
-    echo $_POST[pwd];
-?>
 
 </body>
 </html>
