@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <p>This is a Prototype of a Real Estate Information Website</p>
 
         <p>Please Login or Register here</p>
-        <form name="login" method="post" action="home.php">
+        <form name="login" method="post">
             Username:   <input type="text" name="user" size=20>
             Password:   <input type="password" name="pwd" size="20">
             <input type="submit" name="Login">
@@ -96,8 +96,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <?php
-echo $_POST["user"];
-echo $_POST["pwd"];
+    echo $_POST[user];
+    echo $_POST[pwd];
 ?>
 
 </body>
