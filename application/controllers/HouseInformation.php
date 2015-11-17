@@ -22,6 +22,8 @@ class HouseInformation extends CI_Controller {
         $data['houseInformation_item'] = $this->Houseinfo_model->get_houseInformation($id);
         $data['title'] = "House Information";
 
+        $this->load->view('templates/header', $data);
         $this->load->view('house_information', $data);
+        $this->load->view('templates/footer');
     }
 }
