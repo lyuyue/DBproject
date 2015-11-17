@@ -6,7 +6,9 @@
  * Time: 9:47 PM
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -78,12 +80,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div id="body">
         <p>This is a Prototype of a Real Estate Information Website</p>
-
+        <?php
+            if (isset($_POST['username'])) {
+                echo $_POST['username'];
+            }
+            if (isset($_GET['username'])) {
+                echo $_GET['username'];
+            }
+            if (isset($msg)) {
+                echo '<p>'.$msg.'</p>';
+            }
+        ?>
         <p>Please LOGIN here</p>
-        <form name="login" method="post">
-            Username:   <input type="text" name="user" size=20>
-            Password:   <input type="password" name="pwd" size="20">
-            <input type="submit" name="Login">
+        <?php echo form_open('home/submitLogin'); ?>
+            Username:   <input type="text" name="username" id="username" value="" size=20>
+            Password:   <input type="password" name="password" id="password" value="" size="20">
+            <input type="submit" name="btnLogin" class="btn" value = "Login">
         </form>
 
         <p>If you don't have an account, please REGISTER here</p>

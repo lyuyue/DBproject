@@ -5,7 +5,7 @@
  * Date: 11/14/15
  * Time: 9:13 PM
  */
-class HouseInformation_model extends CI_Model {
+class Houseinfo_model extends CI_Model {
 
     public  function __construct() {
         $this->load->database();
