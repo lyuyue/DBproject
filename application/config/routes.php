@@ -51,12 +51,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 //default
-$route['default_controller'] = 'home';
+$route['default_controller'] = 'main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-//homePage
-$route['home'] = 'home/index';
 
 //houseInformation
 $route['house_information/(:any)'] = 'HouseInformation/view/$1';

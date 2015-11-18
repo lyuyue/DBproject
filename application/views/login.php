@@ -7,7 +7,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<?php include 'css/home.css'; ?>
+<style type = 'text/css'> <?php include 'css/home.css'; ?> </style>
 <div id="container">
     <h1>Welcome to Douban Website</h1>
 
@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         ?>
         <p>Please LOGIN here</p>
-        <?php echo form_open('home/submitLogin'); ?>
+        <?php echo form_open('login/submitLogin'); ?>
             Username:   <input type="text" name="username" id="username" value="" size=20>
             Password:   <input type="password" name="password" id="password" value="" size="20">
             <input type="submit" name="btnLogin" class="btn" value = "Login">
