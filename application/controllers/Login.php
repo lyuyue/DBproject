@@ -25,7 +25,7 @@ class Login extends CI_Controller {
     public function login_err() {
         if (isset($_GET['msg'])) {
             $data['msg'] = $_GET['msg'];
-            $this->load->view('home',$data);
+            $this->load->view('login',$data);
         }
     }
 
