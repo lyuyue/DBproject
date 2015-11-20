@@ -15,9 +15,9 @@ class IndividualUser_model extends CI_Model {
     public function get_loginInformation($username='', $password='') {
         $query = $this->db->get_where("IndividualUser", array("username" => $username));
         $row = $query->row();
-        if ($row['password'] = $password) {
-            $query = $this->db->get_where("User", array("id" => $row['id']));
-            $usertype = $query->row()['userType'];
+        if ($row->password == $password) {
+            $query = $this->db->get_where("User", array("id" => $row->id));
+            $usertype = $query->row()->userType;
             return array('status' => 1,
                          'usertype' => $usertype);
         } else {
