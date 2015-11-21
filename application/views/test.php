@@ -5,4 +5,4 @@
  * Date: 11/19/15
  * Time: 6:23 PM
  */
-    echo $_SESSION['usertype'];
+    echo site_url("UserInformation/viewProfile");

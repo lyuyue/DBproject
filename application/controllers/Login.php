@@ -13,7 +13,7 @@ class Login extends CI_Controller {
         $this->load->database();
         $this->load->library('session');
         $this->load->helper(array('form', 'url'));
-        $this->load->model('IndividualUser_model');
+        $this->load->model('IndividualUser');
     }
 
     public function index() {
@@ -30,6 +30,7 @@ class Login extends CI_Controller {
 
     public function login_success($data) {
         $this->session->set_userdata("login",1);
+        $this->session->set_userdata('id',$data['id']);
         $this->session->set_userdata("username", $data['username']);
         $this->session->set_userdata('usertype', $data['usertype']);
         $data['title'] = 'test';
@@ -53,11 +54,11 @@ class Login extends CI_Controller {
         If (isset($data['msg'])) {
             $this->login_err($data['msg']);
         } else {
-            $result = $this->IndividualUser_model->get_loginInformation($username, $password);
+            $result = $this->IndividualUser->getLoginInformation($username, $password);
             if ($result['status'] == 0) {
                 $this->login_err('Username and Password do not match');
             } else {
-                $data = array("username" => $username, "usertype" => $result['usertype']);
+                $data = array("id" => $result["id"], "username" => $username, "usertype" => $result['usertype']);
                 $this->login_success($data);
             }
         }

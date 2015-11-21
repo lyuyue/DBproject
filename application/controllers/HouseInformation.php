@@ -9,17 +9,17 @@
 class HouseInformation extends CI_Controller {
     public function __construct() {
         parent::__construct();
-        $this->load->model('Houseinfo_model');
+        $this->load->model('Houseinfo');
         $this->load->helper(array('form','url'));
     }
 
     public function index() {
-        $data['houseInformation'] = $this->Houseinfo_model->get_houseInformation();
+        $data['houseInformation'] = $this->Houseinfo->getHouseInformation();
     }
 
     public function view($id) {
         $data['id'] = $id;
-        $data['houseInformation_item'] = $this->Houseinfo_model->get_houseInformation($id);
+        $data['houseInformation_item'] = $this->Houseinfo->getHouseInformation($id);
         $data['title'] = "House Information";
 
         $this->load->view('templates/header', $data);

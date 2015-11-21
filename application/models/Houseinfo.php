@@ -5,13 +5,13 @@
  * Date: 11/14/15
  * Time: 9:13 PM
  */
-class Houseinfo_model extends CI_Model {
+class Houseinfo extends CI_Model {
 
     public  function __construct() {
         $this->load->database();
     }
 
-    public function get_houseInformation($id = 0) {
+    public function getHouseInformation($id = 0) {
         if ($id === 0) {
             $query = $this->db->get('HouseInformation');
             return $query->result->result_array();
