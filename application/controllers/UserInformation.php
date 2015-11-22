@@ -25,4 +25,30 @@
                 $this->load->view('templates/footer');
             }
         }
+
+        public function resetPassword($msg='') {
+            $data['title'] = 'Reset Password';
+            if (isset($msg)) {
+                $data['msg'] = $msg;
+            }
+            $this->load->view('templates/header',$data);
+            $this->load->view('password_reset',$data);
+            $this->load->view('templates/footer');
+        }
+
+        public function submitNewPassword() {
+            if ($_POST['pwd'] != $_SESSION['password']) {
+                $this->resetPassword("Wrong Password");
+            } elseif ($_POST['new_pwd'] != $_POST['new_pwd_again']) {
+                $this->resetPassword("New Password failed in consistence check");
+            } else {
+                $this->resetPasswordSuccess($_POST['new_pwd']);
+            }
+        }
+
+        public function resetPasswordSuccess($new_pwd) {
+            $this->IndividualUser->resetPassword($_SESSION['id'],$new_pwd);
+            $this->session->set_userdata("password", $new_pwd);
+            $this->resetPassword("Password successfully reset");
+        }
     }

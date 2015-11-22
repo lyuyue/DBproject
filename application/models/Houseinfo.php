@@ -8,6 +8,7 @@
 class Houseinfo extends CI_Model {
 
     public  function __construct() {
+        parent::__construct();
         $this->load->database();
     }
 
@@ -19,5 +20,12 @@ class Houseinfo extends CI_Model {
 
         $query = $this->db->get_where('HouseInformation', array('id' => $id));
         return $query->row_array();
+    }
+
+    public function getMyPosts($id) {
+        if (! (isset($id))) {$id = $_GET['id'];}
+        $query = $this->db->get_where('HouseInformation',array("postedBy" => $id));
+        $rows = $query->result();
+        return json_encode(array("data" => $rows));
     }
 }

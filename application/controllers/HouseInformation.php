@@ -9,7 +9,9 @@
 class HouseInformation extends CI_Controller {
     public function __construct() {
         parent::__construct();
+        $this->load->database();
         $this->load->model('Houseinfo');
+        $this->load->library('session');
         $this->load->helper(array('form','url'));
     }
 
@@ -25,5 +27,17 @@ class HouseInformation extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('house_information', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function viewMyPosts() {
+        $data['title'] = 'My Posts';
+        $this->load->view('templates/header',$data);
+        $this->load->view('my_posts',$data);
+        $this->load->view('templates/footer');
+    }
+
+    public function myPosts() {
+        $id = $_SESSION['id'];
+        echo $this->Houseinfo->getMyPosts($id);
     }
 }

@@ -36,4 +36,9 @@ class IndividualUser extends CI_Model {
                     'phone' => $row->phone
                 );
     }
+
+    public function resetPassword($id, $new_pwd) {
+        $sql = "update IndividualUser set password = '$new_pwd' where id = $id";
+        return $this->db->query($sql);
+    }
 }
