@@ -51,4 +51,36 @@
             $this->session->set_userdata("password", $new_pwd);
             $this->resetPassword("Password successfully reset");
         }
+
+        public function registerIndividual($msg='') {
+            $data['title'] = "New Individual User";
+            if (isset($msg)) {
+                $data['msg'] = $msg;
+            }
+            if (isset($_SESSION)) {
+                $this->session->sess_destroy();
+            }
+            $this->load->view('templates/header', $data);
+            $this->load->view('new_individual', $data);
+            $this->load->view('templates/footer');
+        }
+
+        public function registerIndividualSubmit() {
+            $username = $_POST['username'];
+            $password = $_POST['pwd'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+
+            if ($this->IndividualUser->notUniqueUsername($username)) {
+                $this->registerIndividual("Username has been registered.");
+            } else {
+                $this->IndividualUser->registerIndividual($username, $password, $email, $phone);
+                $data['title'] = "Login";
+                $data['$msg'] = "Successfully registered, please Login.";
+                $this->load->view('templates/header', $data);
+                $this->load->view('login', $data);
+                $this->load->view('templates/footer');
+            }
+
+        }
     }

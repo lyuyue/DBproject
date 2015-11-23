@@ -32,9 +32,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </form>
 
         <p>If you don't have an account, please REGISTER here</p>
-        <button type="button" href="www.google.com">Register</button>
+        <button type="button" onclick="register()">Register</button>
 
     </div>
 
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
+
+<script>
+    function register() {
+        window.location.href="<?php echo site_url("UserInformation/registerIndividual"); ?>";
+    }
+</script>

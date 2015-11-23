@@ -41,4 +41,16 @@ class IndividualUser extends CI_Model {
         $sql = "update IndividualUser set password = '$new_pwd' where id = $id";
         return $this->db->query($sql);
     }
+
+    public function notUniqueUsername($username) {
+        $query = $this->db->get_where("IndividualUser", array("username" => $username));
+        return $query->num_rows();
+    }
+
+    public function registerIndividual($username='', $password='', $email='', $phone='') {
+        $sql = "insert into User('userType','username') values(2,$username)";
+        $id = $this->db->insert_id($sql);
+        $sql = "insert into IndividualUser ('id', 'username', 'password', 'email', 'phone') values($id, '$username', '$password', '$email', '$phone')";
+        $this->db->query($sql);
+    }
 }
