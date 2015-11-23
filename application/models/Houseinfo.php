@@ -28,4 +28,10 @@ class Houseinfo extends CI_Model {
         $rows = $query->result();
         return json_encode(array("data" => $rows));
     }
+
+    public function deletePost($id) {
+        $sql = "update HouseInformation set deleteStatus=1 where id = $id";
+        return $this->db->query($sql);
+    }
+
 }

@@ -40,4 +40,28 @@ class HouseInformation extends CI_Controller {
         $id = $_SESSION['id'];
         echo $this->Houseinfo->getMyPosts($id);
     }
+
+    # delete post $id
+    public function deletePost($id) {
+      $data['id'] = $id;
+      $data['houseInformation_item'] = $this->Houseinfo->getHouseInformation($id);
+      $this->session->set_userdata('houseId', $data['id']);
+
+      $this->load->view('templates/header', $data);
+      $this->load->view('delete_post', $data);
+      $this->load->view('templates/footer');
+    }
+
+    # submit delete post $id, set deleteStatus = 1.
+    public function submitDeletePost() {
+        $this->Houseinfo->deletePost($_SESSION['id']);
+        $this->session->unset_userdata('houseId');
+
+        $data['title'] = 'Delete Post';
+        $data['msg'] = "Delete a post.";
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('delete_post',$data);
+        $this->load->view('templates/footer');
+    }
 }
