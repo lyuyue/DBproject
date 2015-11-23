@@ -17,7 +17,14 @@
     <title><?php echo $title; ?></title>
 
     <!--link the bootstrap css file-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
 
 </head>
 <body>
@@ -25,5 +32,27 @@
        <li role="presentation" class="active"><a href="#">Home</a></li>
         <li role="presentation"><a href="#">Profile</a></li>
         <li role="presentation"><a href="#">Messages</a></li>
+        <?php
+            if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
+            echo '<li class="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">';
+                    $url = site_url("UserInformation/viewProfile");
+                    echo '<li><a href = "'.$url.'">My Profile</a></li>';
+                    $url = site_url("UserInformation/resetPassword");
+                    echo '<li><a href = "'.$url.'">Reset Password</a></li>';
+                    echo '<li role="separator" class="divider"></li>';
+                    $url = site_url("HouseInformation/viewMyPosts");
+                    echo '<li><a href="'.$url.'">My Posts</a></li>';
+                    echo '<li role="separator" class="divider"></li>';
+                    $url = site_url("Review/showMyReviews");
+                    echo '<li><a href="'.$url.'">My Reviews</a></li>';
+                    echo '<li role="separator" class="divider"></li>';
+                    $url = site_url('Logout');
+                    echo '<li><a href="'.$url.'">Log out</a></li>';
+            echo '</ul>
+                </li>';
+            }
+        ?>
     </ul>
 

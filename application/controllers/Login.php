@@ -13,6 +13,7 @@ class Login extends CI_Controller {
         $this->load->database();
         $this->load->library('session');
         $this->load->helper(array('form', 'url'));
+        $this->load->model('IndividualUser');
     }
 
     public function index() {
@@ -22,40 +23,45 @@ class Login extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function login_err() {
-        if (isset($_GET['msg'])) {
-            $data['msg'] = $_GET['msg'];
-            $this->load->view('login',$data);
-        }
+    public function login_err($err_msg) {
+        $data['msg'] = $err_msg;
+        $this->load->view('login',$data);
     }
 
-    public function login_sucess($data) {
+    public function login_success($data) {
         $this->session->set_userdata("login",1);
+        $this->session->set_userdata('id',$data['id']);
         $this->session->set_userdata("username", $data['username']);
+        $this->session->set_userdata("password", $data['password']);
         $this->session->set_userdata('usertype', $data['usertype']);
+        $data['title'] = 'test';
+        $this->load->view('templates/header',$data);
+        $this->load->view('test');
+        $this->load->view('templates/footer');
     }
 
     public function submitLogin() {
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        if (trim($username) == '' ) {
-            $redirectUrl = "login/login_err?msg=".urlencode("Username Needed");
-            redirect($redirectUrl);
-        }
-
         if (trim($password) == '' ) {
-            $redirectUrl = "login/login_err?msg=".urlencode('Password Needed');
-            redirect($redirectUrl);
+            $data['msg'] ="Password Needed";
         }
 
-        $result = $this->IndividualUser_model->get_loginInformation($username, $password);
-        if ($result['status'] == 0) {
-            $redirectUrl = "login/login_err?msg=".urlencode("Username and Password do not match");
-            redirect($redirectUrl);
+        if (trim($username) == '' ) {
+            $data['msg'] = "Username Needed";
+        }
+
+        If (isset($data['msg'])) {
+            $this->login_err($data['msg']);
         } else {
-            $data = array("username" => $username, "usertype" => $result['usertype']);
-            redirect('login/login_success', $data);
+            $result = $this->IndividualUser->getLoginInformation($username, $password);
+            if ($result['status'] == 0) {
+                $this->login_err('Username and Password do not match');
+            } else {
+                $data = array("id" => $result["id"], "username" => $username, "password" => $password, "usertype" => $result['usertype']);
+                $this->login_success($data);
+            }
         }
     }
 }
