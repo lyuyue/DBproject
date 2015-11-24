@@ -76,11 +76,83 @@
             } else {
                 $this->IndividualUser->registerIndividual($username, $password, $email, $phone);
                 $data['title'] = "Login";
-                $data['$msg'] = "Successfully registered, please Login.";
+                $data['msg'] = "Successfully registered, please Login.";
                 $this->load->view('templates/header', $data);
                 $this->load->view('login', $data);
                 $this->load->view('templates/footer');
             }
+        }
 
+        public function registerCorporate($msg='') {
+            $data['title'] = 'New Corporate User';
+            if (isset($msg)) {
+                $data['msg'] = $msg;
+            }
+            if (isset($_SESSION)) {
+                $this->session->sess_destroy();
+            }
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('new_corporate', $data);
+            $this->load->view('templates/header');
+        }
+
+        public function registerCorporateSubmit() {
+            $username = $_POST['username'];
+            $password = $_POST['pwd'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $corpname = $_POST['corpname'];
+
+            if ($this->IndividualUser->notUniqueUsername($username)) {
+                $this->registerIndividual("Username has been registered.");
+            } else {
+                $this->IndividualUser->registerCorporate($username, $password, $email, $phone, $corpname);
+                $data['title'] = "Login";
+                $data['msg'] = "Successfully registered, please Login.";
+                $this->load->view('templates/header', $data);
+                $this->load->view('login', $data);
+                $this->load->view('templates/footer');
+            }
+        }
+
+        public function viewUnverifiedCorp() {
+            $data['title'] = 'Unverified Corp User';
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('corp_verification');
+            $this->load->view('templates/footer');
+        }
+
+        public function unverifiedCorp() {
+            echo $this->IndividualUser->unverifiedCorp();
+        }
+
+        public function verifyCorporateUser() {
+            $list = explode(',', $_POST['data']);
+            $this->IndividualUser->verifyCorporateUser($list);
+        }
+
+        # rate user $userid
+        public function rateUser($userid) {
+            $data['userid'] = $userid;
+            $data['title'] = 'Rate user';
+
+            $this->load->view('templates/header',$data);
+            $this->load->view('rate_user',$data);
+            $this->load->view('templates/footer');
+        }
+
+        # submit rate user $userid
+        # need to check validation
+        public function submitRateUser($userid) {
+          $data['id'] = $userid;
+          $data['rateUser'] = $this->IndividualUser->submitRateUser($_SESSION['id'],$userid);
+          $data['title'] = "User Information";
+          $data['msg'] = 'Submit rating successfully.';
+
+          $this->load->view('templates/header', $data);
+          $this->load->view('submit_rate_user', $data);
+          $this->load->view('templates/footer');
         }
     }

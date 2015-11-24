@@ -48,9 +48,60 @@ class IndividualUser extends CI_Model {
     }
 
     public function registerIndividual($username='', $password='', $email='', $phone='') {
-        $sql = "insert into User('userType','username') values(2,$username)";
-        $id = $this->db->insert_id($sql);
-        $sql = "insert into IndividualUser ('id', 'username', 'password', 'email', 'phone') values($id, '$username', '$password', '$email', '$phone')";
-        $this->db->query($sql);
+        $data['userType'] = 2;
+        $this->db->insert('User',$data);
+        $id = $this->db->insert_id();
+        $data = array(
+            'id' => $id,
+            'username' => $username,
+            'password' => $password,
+            'email' => $email,
+            'phone' => $phone
+        );
+        $this->db->insert('IndividualUser', $data);
     }
+
+    public function registerCorporate($username='', $password='', $email='', $phone='', $corpname='') {
+        $data['userType'] = 3;
+        $this->db->insert('User', $data);
+        $id = $this->db->insert_id();
+        $data = array(
+            'id' => $id,
+            'username' => $username,
+            'password' => $password,
+            'email' => $email,
+            'phone' => $phone
+        );
+        $this->db->insert('IndividualUser', $data);
+        $data = array(
+            'id' => $id,
+            'corpName' => $corpname,
+            'verified' => 0,
+            'registeredTime' => date('Y-m-d')
+        );
+        $this->db->insert('CorporateUser', $data);
+    }
+
+    public function unverifiedCorp() {
+        $query = $this->db->get_where('CorporateUser',array('verified' => 0));
+        $rows = $query->result();
+        return json_encode(array('data' => $rows));
+    }
+
+    public function verifyCorporateUser($ids) {
+        foreach ($ids as $id) {
+            $this->db->update('CorporateUser', array('verified' => 1), array('id' => $id));
+        }
+    }
+
+    # submit a new rating to user $relatedTo
+    public function submitRateUser($postedBy,$relatedTo) {
+      $data = array(
+        'relatedTo' => $relatedTo,
+        'postedBy' => $postedBy,
+        'rating' => $this->input->post('rating')
+      );
+      return $this->db->insert('UserRating', $data);
+    }
+
 }

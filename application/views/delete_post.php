@@ -1,9 +1,6 @@
 <?php
-echo $id;
-echo $houseInformation_item['location'];
+echo $id.','.$houseInformation_item['location'].','.$houseInformation_item['deleteStatus'];
 ?>
-
-    <?php echo $msg; ?>
-    <?php echo form_open("HouseInformation/submitDeletePost"); ?>
-        <input type="submit" name="btnLogin" class="btn" value = "Delete">
+        <?php echo form_open("HouseInformation/submitDeletePost/".$id); ?>
+        <input type="submit" name="btnDelete" class="btn" value = "Delete">
     </form>

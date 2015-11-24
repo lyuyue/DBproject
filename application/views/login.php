@@ -14,12 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="body">
         <p>This is a Prototype of a Real Estate Information Website</p>
         <?php
-            if (isset($_POST['username'])) {
-                echo $_POST['username'];
-            }
-            if (isset($_GET['username'])) {
-                echo $_GET['username'];
-            }
             if (isset($msg)) {
                 echo '<p>'.$msg.'</p>';
             }
