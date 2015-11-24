@@ -16,7 +16,7 @@
     </tr>
     </thead>
 </table>
-<button type="button" onclick="verifySelected">Verify</button>
+<button type="button" onclick="verifySelected()">Verify</button>
 
 <script type="text/javascript">
     $(document).ready(
@@ -38,9 +38,17 @@
     );
 
     function verifySelected() {
-        var selected = $(".selected");
-        selected.forEach(function(x) {
-            console.log(x);
+        var Selected = $(".selected");
+        var result ='';
+        for (i=0; i<Selected.length; i++) {
+            result += Selected[i].firstChild.innerHTML + ',';
+        }
+        console.log(result);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url("UserInformation/verifyCorporateUser"); ?>",
+            data:  { data : result },
+            success: function() {window.location.reload();}
         });
     }
 </script>

@@ -12,7 +12,7 @@ class HouseInformation extends CI_Controller {
         $this->load->database();
         $this->load->model('Houseinfo');
         $this->load->library('session');
-        $this->load->helper(array('form','url','date','timezone'));
+        $this->load->helper(array('form','url','date'));
     }
 
     public function index() {

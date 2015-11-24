@@ -128,8 +128,9 @@
             echo $this->IndividualUser->unverifiedCorp();
         }
 
-        public function verifyCorporateUser($data='') {
-
+        public function verifyCorporateUser() {
+            $list = explode(',', $_POST['data']);
+            $this->IndividualUser->verifyCorporateUser($list);
         }
 
         # rate user $userid

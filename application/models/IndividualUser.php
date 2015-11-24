@@ -88,6 +88,12 @@ class IndividualUser extends CI_Model {
         return json_encode(array('data' => $rows));
     }
 
+    public function verifyCorporateUser($ids) {
+        foreach ($ids as $id) {
+            $this->db->update('CorporateUser', array('verified' => 1), array('id' => $id));
+        }
+    }
+
     # submit a new rating to user $relatedTo
     public function submitRateUser($postedBy,$relatedTo) {
       $data = array(
