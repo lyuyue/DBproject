@@ -131,4 +131,27 @@
         public function verifyCorporateUser($data='') {
 
         }
+
+        # rate user $userid
+        public function rateUser($userid) {
+            $data['userid'] = $userid;
+            $data['title'] = 'Rate user';
+
+            $this->load->view('templates/header',$data);
+            $this->load->view('rate_user',$data);
+            $this->load->view('templates/footer');
+        }
+
+        # submit rate user $userid
+        # need to check validation
+        public function submitRateUser($userid) {
+          $data['id'] = $userid;
+          $data['rateUser'] = $this->IndividualUser->submitRateUser($_SESSION['id'],$userid);
+          $data['title'] = "User Information";
+          $data['msg'] = 'Submit rating successfully.';
+
+          $this->load->view('templates/header', $data);
+          $this->load->view('submit_rate_user', $data);
+          $this->load->view('templates/footer');
+        }
     }
