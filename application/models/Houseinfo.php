@@ -12,8 +12,10 @@ class Houseinfo extends CI_Model {
         $this->load->database();
     }
 
-    public function getHouseInformation($id = 0) {
-        if ($id === 0) {
+    public function getHouseInformation($id = 0) 
+    {
+        if ($id === 0) 
+        {
             $query = $this->db->get('HouseInformation');
             return $query->result->result_array();
         }

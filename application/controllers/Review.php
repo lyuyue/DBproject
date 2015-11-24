@@ -25,4 +25,66 @@
             $id = $_SESSION['id'];
             echo $this->ReviewInfo->getMyReviews($id);
         }
+		public function creat($id){
+		
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+	
+			$data['title'] = 'Create a news reviews';
+			$data['user']=$_SESSION['id'];
+			$data['house']=$id;
+	
+			$this->form_validation->set_rules('description','Review Content','required');
+	
+			if ($this->form_validation->run()==FALSE)
+			{	
+				$this->load->view('templates/header', $data);
+				$this->load->view('create_review', $data);
+				$this->load->view('templates/footer', $data);
+		
+			}
+			else {
+				$this->ReviewInfo->creatReview($data['user'], $data['house']);
+			}
+		}
+		public function edit($id)
+		{
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+	
+			$data['title'] = 'Create a news reviews';
+			$data['user']=$_SESSION['id'];
+			$data['house']=$id;
+	
+			$this->form_validation->set_rules('description','Review Content','required');
+	
+			if ($this->form_validation->run()==FALSE)
+			{	
+				$this->load->view('templates/header', $data);
+				$this->load->view('create_review', $data);
+				$this->load->view('templates/footer', $data);
+		
+			}
+			else {
+				$this->ReviewInfo->editReview($data['user'], $data['house']);
+			}
+		}
+		public function delete($id)
+		{
+			$data['title']="Delete Review";
+			$data['user']=$_SESSION['id'];
+			$data['house']=$id;
+			$data['content']=$this->ReviewInfo->getMyReview($data['user'],$data['house']);
+			
+			if ($this->form_validation->run()==FALSE)
+			{	
+				$this->load->view('templates/header', $data);
+				$this->load->view('delete_review', $data);
+				$this->load->view('templates/footer');
+			}
+			else {
+			$this->ReviewInfo->deleteReview($data['user'],$data['house']);
+			}
+		}
+		
     }
