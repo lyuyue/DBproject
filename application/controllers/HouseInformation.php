@@ -11,7 +11,7 @@ class HouseInformation extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Houseinfo');
-        $this->load->library('session');
+        $this->load->library('session','form_validation');
         $this->load->helper(array('form','url','date'));
     }
 
@@ -52,13 +52,26 @@ class HouseInformation extends CI_Controller {
 
     # submit a new post
     public function submitNewPost() {
-        $data['title'] = 'New Post';
-        $data['houseInformation_item']=$this->Houseinfo->newPost($_SESSION['id']);
-        $data['msg'] = "New a post successfully.";
+        $this->form_validation->set_rules('buildYear', 'BuildYear', exact_length[10]);
+        $this->form_validation->set_rules('location', 'Location', 'required');
+        $this->form_validation->set_rules('brNumber', 'BrNumber', 'integer');
+        $this->form_validation->set_rules('price', 'Price', greater_than[0]);
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('typeName', 'TypeName', in_list[0,1]);
 
-        $this->load->view('templates/header',$data);
-        $this->load->view('submit_new_post',$data);
-        $this->load->view('templates/footer');
+      if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('new_post');
+        }
+        else
+        { $data['title'] = 'New Post';
+          $data['houseInformation_item']=$this->Houseinfo->newPost($_SESSION['id']);
+          $data['msg'] = "New a post successfully.";
+
+          $this->load->view('templates/header',$data);
+          $this->load->view('submit_new_post',$data);
+          $this->load->view('templates/footer');
+        }
     }
 
     # delete post $id
