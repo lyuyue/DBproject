@@ -13,6 +13,7 @@ class Main extends CI_Controller {
         $this->load->database();
         $this->load->library('session');
         $this->load->helper(array('form', 'url'));
+        $this->load->model('Houseinfo');
     }
 
     public function index() {
@@ -22,4 +23,7 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function allPosts() {
+        echo $this->Houseinfo->getHouseInformation();
+    }
 }

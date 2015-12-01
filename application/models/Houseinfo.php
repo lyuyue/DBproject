@@ -16,11 +16,11 @@ class Houseinfo extends CI_Model {
     {
         if ($id === 0) 
         {
-            $query = $this->db->get('HouseInformation');
-            return $query->result->result_array();
+            $query = $this->db->get_where('HouseInformation',array('verified' => 1));
+            return json_encode(array("data" => $query->result()));
         }
 
-        $query = $this->db->get_where('HouseInformation', array('id' => $id));
+        $query = $this->db->get_where('HouseInformation', array('id' => $id, 'verified' => 1));
         return $query->row_array();
     }
 
