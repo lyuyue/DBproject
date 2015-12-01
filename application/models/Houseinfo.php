@@ -12,9 +12,9 @@ class Houseinfo extends CI_Model {
         $this->load->database();
     }
 
-    public function getHouseInformation($id = 0) 
+    public function getHouseInformation($id = 0)
     {
-        if ($id === 0) 
+        if ($id === 0)
         {
             $query = $this->db->get('HouseInformation');
             return $query->result->result_array();
@@ -124,7 +124,7 @@ class Houseinfo extends CI_Model {
     }
 
     # update post $id
-    public function updatePost($id) {
+    public function editPost($id) {
       date_default_timezone_set('UTC');
       $data = array(
         'largeImage' => $this->input->post('largeImage'),

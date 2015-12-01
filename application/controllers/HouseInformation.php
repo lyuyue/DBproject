@@ -190,25 +190,39 @@ class HouseInformation extends CI_Controller {
     }
 
     # update post $id
-    public function updatePost($id) {
+    public function editPost($id) {
       $data['id'] = $id;
       $data['title'] = "House Information";
       $data['post'] = $this->Houseinfo->getHouseInformation($id);
 
       $this->load->view('templates/header', $data);
-      $this->load->view('update_post', $data);
+      $this->load->view('edit_post', $data);
       $this->load->view('templates/footer');
     }
 
     # submit a update of post $id
-    public function submitUpdatePost($id) {
-        $data['title'] = 'Update Post';
-        $data['updatedPost']=$this->Houseinfo->updatePost($id);
-        $data['msg'] = "Update a post successfully.";
+    public function submitEditPost($id) {
+        $this->form_validation->set_rules('buildYear', 'BuildYear', exact_length[10]);
+        $this->form_validation->set_rules('location', 'Location', 'required');
+        $this->form_validation->set_rules('brNumber', 'BrNumber', 'integer');
+        $this->form_validation->set_rules('price', 'Price', greater_than[0]);
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('typeName', 'TypeName', in_list[0,1]);
 
-        $this->load->view('templates/header',$data);
-        $this->load->view('submit_update_post',$data);
-        $this->load->view('templates/footer');
+        if ($this->form_validation->run() == FALSE)
+          {
+              $this->load->view('edit_post');
+          }
+          else
+          {
+              $data['title'] = 'Update Post';
+              $data['editedPost']=$this->Houseinfo->editPost($id);
+              $data['msg'] = "Update a post successfully.";
+
+              $this->load->view('templates/header',$data);
+              $this->load->view('submit_edit_post',$data);
+              $this->load->view('templates/footer');
+          }
     }
 
 }
