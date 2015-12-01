@@ -11,7 +11,7 @@ class HouseInformation extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Houseinfo');
-        $this->load->library('session');
+        $this->load->library('session','form_validation');
         $this->load->helper(array('form','url','date'));
     }
 
@@ -52,13 +52,26 @@ class HouseInformation extends CI_Controller {
 
     # submit a new post
     public function submitNewPost() {
-        $data['title'] = 'New Post';
-        $data['houseInformation_item']=$this->Houseinfo->newPost($_SESSION['id']);
-        $data['msg'] = "New a post successfully.";
+        $this->form_validation->set_rules('buildYear', 'BuildYear', 'required|exact_length[10]');
+        $this->form_validation->set_rules('location', 'Location', 'required');
+        $this->form_validation->set_rules('brNumber', 'BrNumber', 'required|integer');
+        $this->form_validation->set_rules('price', 'Price', 'required|greater_than[0]');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[0,1]');
 
-        $this->load->view('templates/header',$data);
-        $this->load->view('submit_new_post',$data);
-        $this->load->view('templates/footer');
+      if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('new_post');
+        }
+        else
+        { $data['title'] = 'New Post';
+          $data['houseInformation_item']=$this->Houseinfo->newPost($_SESSION['id']);
+          $data['msg'] = "New a post successfully.";
+
+          $this->load->view('templates/header',$data);
+          $this->load->view('submit_new_post',$data);
+          $this->load->view('templates/footer');
+        }
     }
 
     # delete post $id
@@ -128,30 +141,6 @@ class HouseInformation extends CI_Controller {
       $this->load->view('templates/footer');
     }
 
-    # rate post $id
-    public function ratePost($id) {
-      $data['id'] = $id;
-      $data['ratePost'] = $this->Houseinfo->getHouseInformation($id);
-      $data['title'] = "House Information";
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('rate_post', $data);
-      $this->load->view('templates/footer');
-    }
-
-    # submit rate post $id
-    # need to check validation
-    public function submitRatePost($id) {
-      $data['id'] = $id;
-      $data['ratePost'] = $this->Houseinfo->submitRatePost($_SESSION['id'],$id);
-      $data['title'] = "House Information";
-      $data['msg'] = 'Submit rating successfully.';
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('submit_rate_post', $data);
-      $this->load->view('templates/footer');
-    }
-
     # set post $id as pin
     # need to check whether user is admin, need to check the row num of results
     public function setPin($id) {
@@ -177,25 +166,39 @@ class HouseInformation extends CI_Controller {
     }
 
     # update post $id
-    public function updatePost($id) {
+    public function editPost($id) {
       $data['id'] = $id;
       $data['title'] = "House Information";
       $data['post'] = $this->Houseinfo->getHouseInformation($id);
 
       $this->load->view('templates/header', $data);
-      $this->load->view('update_post', $data);
+      $this->load->view('edit_post', $data);
       $this->load->view('templates/footer');
     }
 
     # submit a update of post $id
-    public function submitUpdatePost($id) {
-        $data['title'] = 'Update Post';
-        $data['updatedPost']=$this->Houseinfo->updatePost($id);
-        $data['msg'] = "Update a post successfully.";
+    public function submitEditPost($id) {
+        $this->form_validation->set_rules('buildYear', 'BuildYear', 'required|exact_length[10]');
+        $this->form_validation->set_rules('location', 'Location', 'required');
+        $this->form_validation->set_rules('brNumber', 'BrNumber', 'required|integer');
+        $this->form_validation->set_rules('price', 'Price', 'required|greater_than[0]');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[0,1]');
 
-        $this->load->view('templates/header',$data);
-        $this->load->view('submit_update_post',$data);
-        $this->load->view('templates/footer');
+        if ($this->form_validation->run() == FALSE)
+          {
+              $this->load->view('edit_post');
+          }
+          else
+          {
+              $data['title'] = 'Update Post';
+              $data['editedPost']=$this->Houseinfo->editPost($id);
+              $data['msg'] = "Update a post successfully.";
+
+              $this->load->view('templates/header',$data);
+              $this->load->view('submit_edit_post',$data);
+              $this->load->view('templates/footer');
+          }
     }
 
 }

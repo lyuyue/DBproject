@@ -1,5 +1,5 @@
 <?php
-echo $title.', userid='.$userid;
+echo $title.', userid='.$userid.','.$msg;
 ?>
         <?php echo form_open("UserInformation/submitRateUser/".$userid); ?>
         rating:   <input type="number" name="rating" id="rating" value="" size=20>

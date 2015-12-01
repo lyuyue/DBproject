@@ -12,9 +12,9 @@ class Houseinfo extends CI_Model {
         $this->load->database();
     }
 
-    public function getHouseInformation($id = 0) 
+    public function getHouseInformation($id = 0)
     {
-        if ($id === 0) 
+        if ($id === 0)
         {
             $query = $this->db->get_where('HouseInformation',array('verified' => 1));
             return json_encode(array("data" => $query->result()));
@@ -90,16 +90,6 @@ class Houseinfo extends CI_Model {
     return $query->row_array();
     }
 
-    # submit a new rating to post $relatedTo
-    public function submitRatePost($postedBy,$relatedTo) {
-      $data = array(
-        'relatedTo' => $relatedTo,
-        'postedBy' => $postedBy,
-        'rating' => $this->input->post('rating')
-      );
-      return $this->db->insert('HouseRating', $data);
-    }
-
     # set post $id as pin
     public function setPin($id) {
       # set topPost to 1
@@ -124,7 +114,7 @@ class Houseinfo extends CI_Model {
     }
 
     # update post $id
-    public function updatePost($id) {
+    public function editPost($id) {
       date_default_timezone_set('UTC');
       $data = array(
         'largeImage' => $this->input->post('largeImage'),

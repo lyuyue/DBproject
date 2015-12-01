@@ -1,7 +1,7 @@
 <?php
 echo $title;
 ?>
-        <?php echo form_open("HouseInformation/submitUpdatePost/".$id); ?>
+        <?php echo form_open("HouseInformation/submitEditPost/".$id); ?>
         build year:   <input type="text" name="buildYear" id="buildYear" value="<?php echo $post['buildYear']; ?>" size=20>
         location: <input type="text" name="location" id="location" value="<?php echo $post['location']; ?>" size=20>
         bedroom number: <input type="number" name="brNumber" id="brNumber" value="<?php echo $post['brNumber']; ?>" size=20>

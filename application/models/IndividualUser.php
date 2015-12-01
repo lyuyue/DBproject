@@ -94,14 +94,4 @@ class IndividualUser extends CI_Model {
         }
     }
 
-    # submit a new rating to user $relatedTo
-    public function submitRateUser($postedBy,$relatedTo) {
-      $data = array(
-        'relatedTo' => $relatedTo,
-        'postedBy' => $postedBy,
-        'rating' => $this->input->post('rating')
-      );
-      return $this->db->insert('UserRating', $data);
-    }
-
 }
