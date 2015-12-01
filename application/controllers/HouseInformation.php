@@ -52,12 +52,12 @@ class HouseInformation extends CI_Controller {
 
     # submit a new post
     public function submitNewPost() {
-        $this->form_validation->set_rules('buildYear', 'BuildYear', exact_length[10]);
+        $this->form_validation->set_rules('buildYear', 'BuildYear', 'required|exact_length[10]');
         $this->form_validation->set_rules('location', 'Location', 'required');
-        $this->form_validation->set_rules('brNumber', 'BrNumber', 'integer');
-        $this->form_validation->set_rules('price', 'Price', greater_than[0]);
+        $this->form_validation->set_rules('brNumber', 'BrNumber', 'required|integer');
+        $this->form_validation->set_rules('price', 'Price', 'required|greater_than[0]');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('typeName', 'TypeName', in_list[0,1]);
+        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[0,1]');
 
       if ($this->form_validation->run() == FALSE)
         {
@@ -178,12 +178,12 @@ class HouseInformation extends CI_Controller {
 
     # submit a update of post $id
     public function submitEditPost($id) {
-        $this->form_validation->set_rules('buildYear', 'BuildYear', exact_length[10]);
+        $this->form_validation->set_rules('buildYear', 'BuildYear', 'required|exact_length[10]');
         $this->form_validation->set_rules('location', 'Location', 'required');
-        $this->form_validation->set_rules('brNumber', 'BrNumber', 'integer');
-        $this->form_validation->set_rules('price', 'Price', greater_than[0]);
+        $this->form_validation->set_rules('brNumber', 'BrNumber', 'required|integer');
+        $this->form_validation->set_rules('price', 'Price', 'required|greater_than[0]');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('typeName', 'TypeName', in_list[0,1]);
+        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[0,1]');
 
         if ($this->form_validation->run() == FALSE)
           {
