@@ -141,30 +141,6 @@ class HouseInformation extends CI_Controller {
       $this->load->view('templates/footer');
     }
 
-    # rate post $id
-    public function ratePost($id) {
-      $data['id'] = $id;
-      $data['ratePost'] = $this->Houseinfo->getHouseInformation($id);
-      $data['title'] = "House Information";
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('rate_post', $data);
-      $this->load->view('templates/footer');
-    }
-
-    # submit rate post $id
-    # need to check validation
-    public function submitRatePost($id) {
-      $data['id'] = $id;
-      $data['ratePost'] = $this->Houseinfo->submitRatePost($_SESSION['id'],$id);
-      $data['title'] = "House Information";
-      $data['msg'] = 'Submit rating successfully.';
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('submit_rate_post', $data);
-      $this->load->view('templates/footer');
-    }
-
     # set post $id as pin
     # need to check whether user is admin, need to check the row num of results
     public function setPin($id) {

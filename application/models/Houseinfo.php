@@ -90,16 +90,6 @@ class Houseinfo extends CI_Model {
     return $query->row_array();
     }
 
-    # submit a new rating to post $relatedTo
-    public function submitRatePost($postedBy,$relatedTo) {
-      $data = array(
-        'relatedTo' => $relatedTo,
-        'postedBy' => $postedBy,
-        'rating' => $this->input->post('rating')
-      );
-      return $this->db->insert('HouseRating', $data);
-    }
-
     # set post $id as pin
     public function setPin($id) {
       # set topPost to 1

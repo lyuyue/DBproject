@@ -27,4 +27,20 @@ class RatingInfo extends CI_Model {
         $query = $this->db->get_where("UserRating", array("postedBy" => $postedBy,"relatedTo" => $relatedTo));
         return $query->num_rows();
     }
+
+    # submit a new rating to post $relatedTo
+    public function submitRateHouse($postedBy,$relatedTo) {
+      $data = array(
+        'relatedTo' => $relatedTo,
+        'postedBy' => $postedBy,
+        'rating' => $this->input->post('rating')
+      );
+      return $this->db->insert('HouseRating', $data);
+    }
+
+    # check whether the rating $relatedTo by $postedBy exists
+    public function existHouseRating($postedBy,$relatedTo) {
+        $query = $this->db->get_where("HouseRating", array("postedBy" => $postedBy,"relatedTo" => $relatedTo));
+        return $query->num_rows();
+    }
   }

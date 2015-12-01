@@ -31,12 +31,12 @@
         # submit rate user $userid
         # need to check validation
         public function submitRateUser($userid) {
-          if ($this->UserRating->existUserRating($_SESSION['id'],$userid)) {
+          if ($this->RatingInfo->existUserRating($_SESSION['id'],$userid)) {
               $this->rateUser("Rating for this user exists.");
           }
           else {
           $data['id'] = $userid;
-          $data['rateUser'] = $this->IndividualUser->submitRateUser($_SESSION['id'],$userid);
+          $data['rateUser'] = $this->RatingInfo->submitRateUser($_SESSION['id'],$userid);
           $data['title'] = "User Information";
           $data['msg'] = 'Submit rating successfully.';
 
