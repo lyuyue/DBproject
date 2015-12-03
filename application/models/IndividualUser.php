@@ -61,23 +61,16 @@ class IndividualUser extends CI_Model {
         $this->db->insert('IndividualUser', $data);
     }
 
-    public function registerCorporate($username='', $password='', $email='', $phone='', $corpname='') {
+    public function registerCorporate($id='', $corpname='') {
         $data['userType'] = 3;
-        $this->db->insert('User', $data);
-        $id = $this->db->insert_id();
-        $data = array(
-            'id' => $id,
-            'username' => $username,
-            'password' => $password,
-            'email' => $email,
-            'phone' => $phone
-        );
-        $this->db->insert('IndividualUser', $data);
+        $sql = "update User set usertype =3 where id = $id";
+        $this->db->query($sql);
         $data = array(
             'id' => $id,
             'corpName' => $corpname,
             'verified' => 0,
-            'registeredTime' => date('Y-m-d')
+            'registeredTime' => date('Y-m-d'),
+            'applicationTime' => date('Y-m-d'),
         );
         $this->db->insert('CorporateUser', $data);
     }

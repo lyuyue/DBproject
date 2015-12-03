@@ -30,8 +30,14 @@
 <body>
     <ul class="nav nav-pills">
         <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
+        <?php
+            if (! isset($_SESSION['login'])) {
+                $url = site_url('login');
+                echo '<li role="presentation"><a href="'.$url.'">Login</a></li>';
+                $url = site_url('UserInformation/registerIndividual');
+                echo '<li role="presentation"><a href="'.$url.'">Register</a></li>';
+            }
+        ?>
         <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
             echo '<li class="">
@@ -41,6 +47,10 @@
                     echo '<li><a href = "'.$url.'">My Profile</a></li>';
                     $url = site_url("UserInformation/resetPassword");
                     echo '<li><a href = "'.$url.'">Reset Password</a></li>';
+                    if ($_SESSION['usertype'] == 2) {
+                        $url = site_url("UserInformation/registerCorporate");
+                        echo '<li><a href = "'.$url.'">Corporate Application</a></li>';
+                    }
                     echo '<li role="separator" class="divider"></li>';
                     $url = site_url("HouseInformation/viewMyPosts");
                     echo '<li><a href="'.$url.'">My Posts</a></li>';
@@ -52,14 +62,6 @@
                     echo '<li><a href="'.$url.'">Log out</a></li>';
             echo '</ul>
                 </li>';
-            }
-        ?>
-        <?php
-            if (! isset($_SESSION['login'])) {
-                echo '<div class="pull-right>';
-                echo '<li role="presentation" class="active">Login</li>';
-                echo '<li role="presentation">Register</li>';
-                echo '</div>';
             }
         ?>
     </ul>

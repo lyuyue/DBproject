@@ -88,32 +88,25 @@
             if (isset($msg)) {
                 $data['msg'] = $msg;
             }
-            if (isset($_SESSION)) {
-                $this->session->sess_destroy();
-            }
 
             $this->load->view('templates/header', $data);
             $this->load->view('new_corporate', $data);
-            $this->load->view('templates/header');
+            $this->load->view('templates/footer');
         }
 
         public function registerCorporateSubmit() {
-            $username = $_POST['username'];
-            $password = $_POST['pwd'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
             $corpname = $_POST['corpname'];
+            $id = $_SESSION['id'];
 
-            if ($this->IndividualUser->notUniqueUsername($username)) {
-                $this->registerIndividual("Username has been registered.");
-            } else {
-                $this->IndividualUser->registerCorporate($username, $password, $email, $phone, $corpname);
-                $data['title'] = "Login";
-                $data['msg'] = "Successfully registered, please Login.";
-                $this->load->view('templates/header', $data);
-                $this->load->view('login', $data);
-                $this->load->view('templates/footer');
-            }
+            $this->session->sess_destroy();
+
+            $this->IndividualUser->registerCorporate($id, $corpname);
+            $data['title'] = "Login";
+            $data['msg'] = "Successfully registered, please Login.";
+            $this->load->view('templates/header', $data);
+            $this->load->view('login', $data);
+            $this->load->view('templates/footer');
+
         }
 
         public function viewUnverifiedCorp() {

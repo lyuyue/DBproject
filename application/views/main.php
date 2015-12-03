@@ -10,6 +10,7 @@
 <table id="postList" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
+        <th>Id</th>
         <th>Image</th>
         <th>Location</th>
         <th>BuildYear</th>
@@ -26,15 +27,37 @@
         function () {
             $('#postList').DataTable({
                 "sAjaxSource": "main/allPosts",
-                "aoColumns":
+                "aoColumnDefs":
                     [
-                        { 'mData': 'listImage' },
-                        { 'mData': 'location' },
-                        { 'mData': 'buildYear' },
-                        { 'mData': 'brNumber' },
-                        { 'mData': 'price' },
-                        { 'mData': 'viewTimes' },
-                        { 'mData': 'averageRating' },
+                        {
+                            'aTargets': [0],
+                            'mData': 'id',
+                            "mRender" : function (data, type, full) {
+                                url = <?php echo "'".site_url("HouseInformation/view")."/'"; ?>;
+                                return "<a href='" + url + data +"'>" + data + "</a>";
+                            }
+                        },
+                        {
+                            'aTargets': [1],
+                            'mData': 'listImage' },
+                        {
+                            'aTargets': [2],
+                            'mData': 'location' },
+                        {
+                            'aTargets': [3],
+                            'mData': 'buildYear' },
+                        {
+                            'aTargets': [4],
+                            'mData': 'brNumber' },
+                        {
+                            'aTargets': [5],
+                            'mData': 'price' },
+                        {
+                            'aTargets': [6],
+                            'mData': 'viewTimes' },
+                        {
+                            'aTargets': [7],
+                            'mData': 'averageRating' },
                     ]
             });
         }
