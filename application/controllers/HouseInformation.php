@@ -19,10 +19,14 @@ class HouseInformation extends CI_Controller {
         $data['houseInformation'] = $this->Houseinfo->getHouseInformation();
     }
 
-    public function view($id) {
+    public function view($id,$msg='',$update_view_times=1) {
+        if($update_view_times === 1){
+          $this->Houseinfo->addViewTimes($id);
+        }
         $data['id'] = $id;
         $data['houseInformation_item'] = $this->Houseinfo->getHouseInformation($id);
         $data['title'] = "House Information";
+        $data['msg'] = $msg;
 
         $this->load->view('templates/header', $data);
         $this->load->view('house_information', $data);
@@ -42,8 +46,9 @@ class HouseInformation extends CI_Controller {
     }
 
     # post a new House
-    public function newPost() {
+    public function newPost($msg='') {
       $data['title'] = "House Information";
+      $data['msg'] = $msg;
 
       $this->load->view('templates/header', $data);
       $this->load->view('new_post', $data);
@@ -57,21 +62,17 @@ class HouseInformation extends CI_Controller {
         $this->form_validation->set_rules('brNumber', 'BrNumber', 'required|integer');
         $this->form_validation->set_rules('price', 'Price', 'required|greater_than[0]');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[0,1]');
+        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[1,2]');
 
-      if ($this->form_validation->run() == FALSE)
-        {
-            $this->load->view('new_post');
-        }
-        else
-        { $data['title'] = 'New Post';
-          $data['houseInformation_item']=$this->Houseinfo->newPost($_SESSION['id']);
-          $data['msg'] = "New a post successfully.";
-
-          $this->load->view('templates/header',$data);
-          $this->load->view('submit_new_post',$data);
-          $this->load->view('templates/footer');
-        }
+        if ($this->form_validation->run() == FALSE)
+          { $this->newPost('Error in input data. Input again.');
+          }
+          else
+          { $id=$this->Houseinfo->newPost($_SESSION['id']);
+            $msg = "New a post successfully.";
+            $update_view_times = 0;
+            $this->view($id,$msg,$update_view_times);
+          }
     }
 
     # delete post $id
@@ -166,10 +167,11 @@ class HouseInformation extends CI_Controller {
     }
 
     # update post $id
-    public function editPost($id) {
+    public function editPost($id,$msg='') {
       $data['id'] = $id;
       $data['title'] = "House Information";
       $data['post'] = $this->Houseinfo->getHouseInformation($id);
+      $data['msg'] = $msg;
 
       $this->load->view('templates/header', $data);
       $this->load->view('edit_post', $data);
@@ -183,22 +185,16 @@ class HouseInformation extends CI_Controller {
         $this->form_validation->set_rules('brNumber', 'BrNumber', 'required|integer');
         $this->form_validation->set_rules('price', 'Price', 'required|greater_than[0]');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[0,1]');
+        $this->form_validation->set_rules('typeName', 'TypeName', 'required|in_list[1,2]');
 
         if ($this->form_validation->run() == FALSE)
-          {
-              $this->load->view('edit_post');
+          { $this->editPost($id,'Error in input data. Input again.');
           }
           else
-          {
-              $data['title'] = 'Update Post';
-              $data['editedPost']=$this->Houseinfo->editPost($id);
-              $data['msg'] = "Update a post successfully.";
-
-              $this->load->view('templates/header',$data);
-              $this->load->view('submit_edit_post',$data);
-              $this->load->view('templates/footer');
+          { $this->Houseinfo->editPost($id);
+            $msg = "Update post successfully.";
+            $update_view_times = 0;
+            $this->view($id,$msg,$update_view_times);
           }
     }
-
 }

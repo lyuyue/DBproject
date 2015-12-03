@@ -1,4 +1,5 @@
 <?php
+echo $msg.'<br />'.'<br />';
 echo $title;
 ?>
         <?php echo form_open("HouseInformation/submitNewPost"); ?>

@@ -50,7 +50,8 @@ class Houseinfo extends CI_Model {
         'averageRating' => 0.0,
         'postedBy' => $id
       );
-      return $this->db->insert('HouseInformation', $data);
+      $this->db->insert('HouseInformation', $data);
+      return $this->db->insert_id();
     }
 
     # delete post $id
@@ -82,6 +83,15 @@ class Houseinfo extends CI_Model {
     public function getTagStatistics($id) {
     $query = $this->db->get_where('TagStatistics', array('usedBy' => $id));
     return $query->result_array();
+    }
+
+    # add view times of post $id
+    public function addViewTimes($id) {
+    $query = $this->db->get_where('HouseInformation', array('id' => $id));
+    $viewTimes = $query->row()->viewTimes;
+    $data = array('viewTimes' => $viewTimes + 1);
+    $this->db->where('id',$id);
+    return $query = $this->db->update('HouseInformation', $data);
     }
 
     # get view times of post $id
@@ -127,10 +137,7 @@ class Houseinfo extends CI_Model {
         'updateTime' => date("Y/m/d")
       );
       $this->db->where('id',$id);
-      $query = $this->db->update('HouseInformation', $data);
-
-      $query = $this->db->get_where('HouseInformation', array('id' => $id));
-      return $query->row_array();
+      return $query = $this->db->update('HouseInformation', $data);
     }
 
 }
