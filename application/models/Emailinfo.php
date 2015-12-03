@@ -7,15 +7,15 @@ class Emailinfo extends CI_Model{
 	}
 	public function getEmaillist($id)
 	{
-			$sql = "select e, r.receivedBy, r.readStatus from Email e, ReadStatus r where r.receive=e.id and e.sentBy = ?";
+			$sql = "select e.*, r.receivedBy, r.readStatus from Email AS e, ReadStatus AS r where r.receive=e.id and e.sentBy = ?";
 			$query = $this->db->query($sql, $id);			
-			return $query->row_array();
+			return $query->result_array();
 	}
 	public function getEmailDetail($id)
 	{
-		$sql = "select e, r.receivedBy, r.readStatus from Email e, ReadStatus r where e.id = ?";
+		$sql = "select e.*, r.receivedBy, r.readStatus from Email AS e, ReadStatus AS r where r.receive = e.id and e.id= ?";
 		$query = $this->db->query($sql, $id);
-		return $query->row_array();
+		return $query->result_array();
 	}
 	public function createEmail()
 	{
@@ -39,8 +39,8 @@ class Emailinfo extends CI_Model{
 	}
 	public function unreadEmail($id)
 	{
-			$sql = "select e from Email e, ReadStatus r where r.receive=e.id and r.receivedBy = ?";
+			$sql = "select e.* from Email AS e, ReadStatus AS r where r.receive=e.id and r.receivedBy = ?";
 			$query = $this->db->query($sql, $id);			
-			return $query->row_array();
+			return $query->result_array();
 	}
 }
