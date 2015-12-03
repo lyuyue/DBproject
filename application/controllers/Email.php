@@ -35,22 +35,22 @@ class Email extends CI_Controller
 	
 	$data['title'] = 'Create a news email';
 
-	
-	$this->form_validation->set_rules('sendBy','Email Sender','required|valid_email');
-	$this->form_validation->set_rules('sendTo','Email Receiver','required|valid_email');
+	$this->form_validation->set_rules('sendTo','Email Receiver','callback_receiver_check');
 	$this->form_validation->set_rules('title','Email Title','required');
 	$this->form_validation->set_rules('content','Email Content','required');
 	
 	if ($this->form_validation->run()==FALSE)
 	{
+		echo "The receiver does not exist!~~ 0_o~~";
+				
 		$this->load->view('templates/header', $data);
-		$this->load->view('create_email');
+		$this->load->view('create_email', $_SESSION['id']);
 		$this->load->view('templates/footer', $data);
 		
 	}
 	else {
-		$this->Emailinfor->creatEmail();
-		$this->Emailinfor->createReadStatus();
+		$this->Emailinfo->createEmail($_SESSION['id']);
+		echo "Email succesfully created!~~~";
 	}
 	}
 	public function unread()
@@ -61,6 +61,17 @@ class Email extends CI_Controller
 		$this->load->view('templates/header', $data);
 		$this->load->view('email_index', $data);
 		$this->load->view('templates/footer', $data);
+	}
+	public function receiver_check($id)
+	{
+		$receiver = $this->Emailinfo->receiver($id);
+		if($receiver > 0)
+		{
+			return TRUE;
+		}
+		else{
+				return FALSE;
+			}
 	}
 	
 }

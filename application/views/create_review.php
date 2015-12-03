@@ -1,10 +1,7 @@
 <h2>Create a new review item</h2>
-<table border='1'>
-	<tr>
-	<td><?php echo $id ?></td>
-	<td><?php echo $house ?></td>
-	</tr>
-</table>
+<?php echo "Current User ID: ".$user.'<br />'.'<br />';
+echo "Current House ID: ".$house.'<br />'.'<br />';
+?>
 </php echo validation_errors();?>
 <?php echo form_open('Review/create')?>
 <label for="description">Review Content</label>

@@ -16,8 +16,7 @@
         }
 
         public function showMyReviews() {
-			$data['title'] = 'My Reviews';
-            $this->load->view("templates/header", $data);
+            $this->load->view("templates/header");
             $this->load->view("review");
             $this->load->view("templates/footer");
         }
@@ -26,7 +25,7 @@
             $id = $_SESSION['id'];
             echo $this->ReviewInfo->getMyReviews($id);
         }
-		public function creat($id){
+		public function create($id){
 		
 			$this->load->helper('form');
 			$this->load->library('form_validation');
@@ -60,7 +59,8 @@
 			$this->form_validation->set_rules('description','Review Content','required');
 	
 			if ($this->form_validation->run()==FALSE)
-			{	
+			{
+				echo "Must add some content to the description~!! o_0~~";	
 				$this->load->view('templates/header', $data);
 				$this->load->view('create_review', $data);
 				$this->load->view('templates/footer', $data);

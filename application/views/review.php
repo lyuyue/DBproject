@@ -21,20 +21,10 @@
         function () {
             $('#review').DataTable({
                 "sAjaxSource": "myReviews",
-                "aoColumnDefs":
+                "aoColumns":
                     [
-                        {
-                            "aTargets": [ 0 ],
-                            "mData": 'belongsTo',
-                            "mRender" : function (data, type, full) {
-                                url = <?php echo "'".site_url("HouseInformation/view")."/'"; ?>;
-                                return "<a href='" + url + data +"'>" + data + "</a>";
-                            }
-                        },
-                        {
-                            "aTargets": [ 1 ],
-                            "mData": 'description'
-                        },
+                        { 'mData': 'belongsTo' },
+                        { 'mData': 'description' },
                     ]
             });
         }
