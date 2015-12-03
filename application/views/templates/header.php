@@ -53,6 +53,8 @@
                         echo '<li><a href = "'.$url.'">Corporate Application</a></li>';
                     }
                     echo '<li role="separator" class="divider"></li>';
+                    $url = site_url("Email");
+                    echo '<li><a href="'.$url.'">My Emails</a></li>';
                     $url = site_url("HouseInformation/viewMyPosts");
                     echo '<li><a href="'.$url.'">My Posts</a></li>';
                     echo '<li role="separator" class="divider"></li>';
