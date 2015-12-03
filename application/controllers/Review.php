@@ -16,7 +16,8 @@
         }
 
         public function showMyReviews() {
-            $this->load->view("templates/header");
+			$data['title'] = 'My Reviews';
+            $this->load->view("templates/header", $data);
             $this->load->view("review");
             $this->load->view("templates/footer");
         }
