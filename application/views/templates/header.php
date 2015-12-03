@@ -29,18 +29,19 @@
 </head>
 <body>
     <ul class="nav nav-pills">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
         <?php
+            $url = site_url("main");
+            echo '<li role="presentation" class="active"><a href="'.$url.'">Home</a></li>';
+
             if (! isset($_SESSION['login'])) {
                 $url = site_url('login');
                 echo '<li role="presentation"><a href="'.$url.'">Login</a></li>';
                 $url = site_url('UserInformation/registerIndividual');
                 echo '<li role="presentation"><a href="'.$url.'">Register</a></li>';
             }
-        ?>
-        <?php
+
             if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
-            echo '<li class="">
+                echo '<li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
                     <ul class="dropdown-menu">';
                     $url = site_url("UserInformation/viewProfile");
@@ -60,7 +61,19 @@
                     echo '<li role="separator" class="divider"></li>';
                     $url = site_url('Logout');
                     echo '<li><a href="'.$url.'">Log out</a></li>';
-            echo '</ul>
+                echo '</ul>
+                </li>';
+            }
+
+            IF (isset($_SESSION['usertype']) && $_SESSION['usertype'] == 4) {
+                echo '<li class="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration<span class="caret"></span></a>
+                    <ul class="dropdown-menu">';
+                $url = site_url("UserInformation/viewUnverifiedCorp");
+                echo '<li><a href="'.$url.'">Verify Corporate</a></li>';
+                echo '<li><a href="#">Verify Post</a></li>';
+
+                echo '</ul>
                 </li>';
             }
         ?>

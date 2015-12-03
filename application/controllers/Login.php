@@ -34,10 +34,7 @@ class Login extends CI_Controller {
         $this->session->set_userdata("username", $data['username']);
         $this->session->set_userdata("password", $data['password']);
         $this->session->set_userdata('usertype', $data['usertype']);
-        $data['title'] = 'test';
-        $this->load->view('templates/header',$data);
-        $this->load->view('test');
-        $this->load->view('templates/footer');
+        redirect("/main");
     }
 
     public function submitLogin() {
