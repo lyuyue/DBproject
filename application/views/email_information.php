@@ -1,8 +1,8 @@
 <?php
-
-echo $id;
-echo "Send From: ".$emailInformation['sentBy'];
-echo "Title: ".$emailInformation['title'];
-echo "Send Time: ".$emailInformation['sendTime'];
-echo "Send To: ".$emailInformation['sendTo'];
-echo "Content: ".$emailInformation['content'];
+foreach ($emailDetail as $Detail)
+echo "Email ID: ".$Detail['id'];
+echo "Send From: ".$Detail['sentBy'];
+echo "Title: ".$Detail['title'];
+echo "Send Time: ".$Detail['sendTime'];
+echo "Send To: ".$Detail['receivedBy'];
+echo "Content: ".$Detail['content'];

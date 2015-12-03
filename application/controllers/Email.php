@@ -7,7 +7,7 @@ class Email extends CI_Controller
 		$this->load->database();
 		$this->load->model('Emailinfo');
 		$this->load->library('session');
-		$this->load->helper(arry('form','url','date'));
+		$this->load->helper(array('form','url','date'));
 	}
 	public function index()
 	{
@@ -20,8 +20,7 @@ class Email extends CI_Controller
 	}
 	public function view ($id)
 	{
-		$data['id']=$id;
-		$data['emailInformation']=$this->Emailinfo->getEmailDetail($id);
+		$data['emailDetail']=$this->Emailinfo->getEmailDetail($id);
 		$data['title']="Email Detail";
 		
 		$this->load->view('templates/header', $data);
