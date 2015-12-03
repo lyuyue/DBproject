@@ -23,8 +23,8 @@
         }
 		public function getMyreview($id,$house)
 		{
-			$sql = "select Review.description from Review where postedBy = ? , belongsTo = ?";
-			return $this->db->query($sql, $id,$house);
+			$sql = "select Review.description from Review where postedBy = ? AND belongsTo = ? ";
+			return $this->db->query($sql, array($id,$house));
 		}
 		public function createReview($id,$house)
 		{

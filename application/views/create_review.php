@@ -3,7 +3,7 @@
 echo "Current House ID: ".$house.'<br />'.'<br />';
 ?>
 </php echo validation_errors();?>
-<?php echo form_open('Review/create')?>
+<?php echo form_open('Review/create'."/".$house)?>
 <label for="description">Review Content</label>
 <textarea name="description"></textarea><br />
 

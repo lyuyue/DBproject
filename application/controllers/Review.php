@@ -44,7 +44,14 @@
 		
 			}
 			else {
-				$this->ReviewInfo->creatReview($data['user'], $data['house']);
+				if($this->ReviewInfo->getMyReview($data['user'],$data['house'])->num_rows()>0)
+				{
+					echo "Review already exists~!0_o~~";
+				}
+				else{
+				echo "Review created succesfully~!! :)";
+				$this->ReviewInfo->createReview($data['user'], $data['house']);
+			}
 			}
 		}
 		public function edit($id)
