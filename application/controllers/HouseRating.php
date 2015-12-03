@@ -16,7 +16,7 @@ class HouseInformation extends CI_Controller {
     }
 
     # rate post $id
-    public function housRating($id, $msg='') {
+    public function houseRating($id, $msg='') {
       $data['id'] = $id;
       $data['ratePost'] = $this->Houseinfo->getHouseInformation($id);
       $data['title'] = "House Information";
@@ -32,9 +32,9 @@ class HouseInformation extends CI_Controller {
 
     # submit rate post $id
     # need to check validation
-    public function submitHousRating($id) {
+    public function submitHouseRating($id) {
       if ($this->RatingInfo->existHouseRating($_SESSION['id'],$id)) {
-          $this->housRating("Rating for this post exists.");
+          $this->houseRating("Rating for this post exists.");
       }
       else {
       $data['id'] = $id;
