@@ -38,13 +38,10 @@ class HouseInformation extends CI_Controller {
       }
       else {
       $data['id'] = $id;
-      $data['ratePost'] = $this->RatingInfo->submitRateHouse($_SESSION['id'],$id);
-      $data['title'] = "House Information";
+      $this->RatingInfo->submitRateHouse($_SESSION['id'],$id);
       $data['msg'] = 'Submit rating successfully.';
 
-      $this->load->view('templates/header', $data);
-      $this->load->view('submit_rate_house', $data);
-      $this->load->view('templates/footer');
+      $this->view($id,$msg,0);
       }
     }
   }

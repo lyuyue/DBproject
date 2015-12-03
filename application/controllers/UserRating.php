@@ -36,7 +36,7 @@
           }
           else {
           $data['id'] = $userid;
-          $data['rateUser'] = $this->RatingInfo->submitRateUser($_SESSION['id'],$userid);
+          $this->RatingInfo->submitRateUser($_SESSION['id'],$userid);
           $data['title'] = "User Information";
           $data['msg'] = 'Submit rating successfully.';
 
