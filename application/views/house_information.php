@@ -19,6 +19,14 @@
 
 ?>
 
+<?php echo form_open("HouseInformation/getSellerInformation/".$houseInformation_item['postedBy']); ?>
+<input type="submit" name="btnNew" class="btn" value = "User Information">
+</form>
+
+<?php echo form_open("HouseInformation/houseRating/".$houseInformation_item['id']); ?>
+<input type="submit" name="btnNew" class="btn" value = "Rate">
+</form>
+
     <img src="<?php
                 if(file_exists(base_url('images/'. $houseInformation_item['largeImage']))){
                 echo base_url('images/'. $houseInformation_item['largeImage']);
