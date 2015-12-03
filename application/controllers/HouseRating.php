@@ -6,12 +6,12 @@
  * Time: 9:45 PM
  */
 
-class HouseInformation extends CI_Controller {
+class HouseRating extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model('Houseinfo','RatingInfo');
-        $this->load->library('session','form_validation');
+        $this->load->library('form_validation');
+        $this->load->model(array('Houseinfo','RatingInfo'));
         #$this->load->helper(array('form','url','date'));
     }
 

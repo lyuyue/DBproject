@@ -10,7 +10,7 @@ class HouseInformation extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model('Houseinfo');
+        $this->load->model(array('Houseinfo','RatingInfo'));
         $this->load->library('session','form_validation');
         $this->load->helper(array('form','url','date'));
     }
@@ -197,4 +197,35 @@ class HouseInformation extends CI_Controller {
             $this->view($id,$msg,$update_view_times);
           }
     }
+
+    # rate post $id
+    public function houseRating($id, $msg='') {
+      $data['id'] = $id;
+      $data['ratePost'] = $this->Houseinfo->getHouseInformation($id);
+      $data['title'] = "House Information";
+
+      if(isset($msg))
+      { $data['msg'] = $msg;
+      }
+
+      $this->load->view('templates/header', $data);
+      $this->load->view('rate_house', $data);
+      $this->load->view('templates/footer');
+    }
+
+    # submit rate post $id
+    # need to check validation
+    public function submitHouseRating($id) {
+      if ($this->RatingInfo->existHouseRating(4,$id)) {
+          $this->houseRating("Rating for this post exists.");
+      }
+      else {
+      $data['id'] = $id;
+      $this->RatingInfo->submitRateHouse(4,$id);
+      $msg = 'Submit rating successfully.';
+
+      $this->view($id,$msg,0);
+      }
+    }
+
 }
