@@ -39,7 +39,11 @@
                         },
                         {
                             'aTargets': [1],
-                            'mData': 'listImage' },
+                            'mData': 'listImage',
+                            'mRender' : function (data, type, full) {
+                                return "<img src='/images/"+data+"' />";
+                            }
+                        },
                         {
                             'aTargets': [2],
                             'mData': 'location' },
