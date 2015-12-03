@@ -29,13 +29,13 @@
 </head>
 <body>
     <ul class="nav nav-pills">
-       <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation" class="active"><a href="#">Home</a></li>
         <li role="presentation"><a href="#">Profile</a></li>
         <li role="presentation"><a href="#">Messages</a></li>
         <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
             echo '<li class="">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
                     <ul class="dropdown-menu">';
                     $url = site_url("UserInformation/viewProfile");
                     echo '<li><a href = "'.$url.'">My Profile</a></li>';
@@ -52,6 +52,14 @@
                     echo '<li><a href="'.$url.'">Log out</a></li>';
             echo '</ul>
                 </li>';
+            }
+        ?>
+        <?php
+            if (! isset($_SESSION['login'])) {
+                echo '<div class="pull-right>';
+                echo '<li role="presentation" class="active">Login</li>';
+                echo '<li role="presentation">Register</li>';
+                echo '</div>';
             }
         ?>
     </ul>
