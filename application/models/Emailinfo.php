@@ -17,13 +17,13 @@ class Emailinfo extends CI_Model{
 		$query = $this->db->query($sql, $id);
 		return $query->result_array();
 	}
-	public function createEmail()
+	public function createEmail($id)
 	{
 		$data1 = array(
-		'sentBy' => $this->input->post('sendBy'),
+		'sentBy' => $id,
 		'title' => $this->input->post('title'),
-		'sendTime' => now(),
-		'conten' => $this->input->post('content')
+		'sendTime' => date('Y-m-d'),
+		'content' => $this->input->post('content')
 		);
 		
 		$this->db->insert('Email',$data1);
@@ -36,6 +36,11 @@ class Emailinfo extends CI_Model{
 		
 		$this->db->insert('ReadStatus',$data2);
 		
+	}
+	public function receiver($id)
+	{
+		$query = $this->db->get_where('IndividualUser', array('id' => $id));
+		return $query->num_rows();
 	}
 	public function unreadEmail($id)
 	{
