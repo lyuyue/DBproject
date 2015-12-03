@@ -28,6 +28,6 @@
 </form>
 
     <img src="<?php
-                if(file_exists(base_url('images/'. $houseInformation_item['largeImage']))){
-                echo base_url('images/'. $houseInformation_item['largeImage']);
+                if(file_exists('images/'. $houseInformation_item['largeImage'])){
+                echo '/images/'. $houseInformation_item['largeImage'];
                 }?>" />
