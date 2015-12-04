@@ -1,2 +1,3 @@
 <?php
-echo $msg.',post:'.$rateUser['relatedTo'].',user:'.$rateUser['postedBy'];
+echo $msg.'<br />';
+echo 'rated user: '.$rateUser['id'],', average rating: '.$rateUser['averageRating'];

@@ -35,10 +35,10 @@
       if(file_exists('images/'. $houseInformation_item['largeImage'])){
         echo '/images/'. $houseInformation_item['largeImage'];
       }?>" />
-      
+
 <p></p>
 <button>
-  <a href="<?php echo site_url("UserRating/rateUser/".$sellerInformation['id']); ?>"
+  <a href="<?php echo site_url("UserInformation/rateUser/".$sellerInformation['id']); ?>"
     >Rate Seller</a>
 </button>
 <button>

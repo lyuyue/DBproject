@@ -20,7 +20,10 @@ class RatingInfo extends CI_Model {
         'rating' => $this->input->post('rating')
       );
       $this->db->insert('UserRating', $data);
-      return $this->RatingInfo->updateUserRating($relatedTo);
+      $this->RatingInfo->updateUserRating($relatedTo);
+
+      $query = $this->db->get_where("IndividualUser", array("id" => $relatedTo));
+      return $query->row_array();
     }
 
     public function updateUserRating($id) {
@@ -31,7 +34,7 @@ class RatingInfo extends CI_Model {
 
       $data = array('averageRating' => $rating);
       $this->db->where('id',$id);
-      return $this->db->update('IndividualUser', $data);
+      $this->db->update('IndividualUser', $data);
     }
 
     # check whether the rating $relatedTo by $postedBy exists
@@ -40,6 +43,7 @@ class RatingInfo extends CI_Model {
         return $query->num_rows();
     }
 
+    # submit a new rating to post $relatedTo
     public function submitRateHouse($postedBy,$relatedTo) {
       $data = array(
         'relatedTo' => $relatedTo,
@@ -48,7 +52,7 @@ class RatingInfo extends CI_Model {
       );
       $this->db->insert('HouseRating', $data);
 
-      return $this->RatingInfo->updateHouseRating($relatedTo);
+      $this->RatingInfo->updateHouseRating($relatedTo);
     }
 
     public function updateHouseRating($id) {
@@ -59,7 +63,7 @@ class RatingInfo extends CI_Model {
 
       $data = array('averageRating' => $rating);
       $this->db->where('id',$id);
-      return $this->db->update('HouseInformation', $data);
+      $this->db->update('HouseInformation', $data);
     }
 
     # check whether the rating $relatedTo by $postedBy exists

@@ -180,11 +180,9 @@ class HouseInformation extends CI_Controller {
           }
     }
 
-    # rate post $id
     public function houseRating($id, $msg='') {
       $data['id'] = $id;
       $data['ratePost'] = $this->Houseinfo->getHouseInformation($id);
-      $data['title'] = "House Information";
 
       if(isset($msg))
       { $data['msg'] = $msg;
@@ -198,15 +196,21 @@ class HouseInformation extends CI_Controller {
     # submit rate post $id
     # need to check validation
     public function submitHouseRating($id) {
-      if ($this->RatingInfo->existHouseRating(4,$id)) {
-          $this->houseRating("Rating for this post exists.");
+      $this->form_validation->set_rules('rating', 'Rating', 'required|in_list[1,2,3,4,5]');
+      if ($this->form_validation->run() == FALSE){
+          $this->houseRating($id,'Error in input data. Input again.');
       }
-      else {
-      $data['id'] = $id;
-      $this->RatingInfo->submitRateHouse(4,$id);
-      $msg = 'Submit rating successfully.';
+      else{
+        if ($this->RatingInfo->existHouseRating($_SESSION['id'],$id)) {
+            $this->houseRating($id,"Rating for this post exists.");
+        }
+        else {
+        $data['id'] = $id;
+        $this->RatingInfo->submitRateHouse($_SESSION['id'],$id);
+        $msg = 'Submit rating successfully.';
 
-      $this->view($id,$msg,0);
+        $this->view($id,$msg,0);
+        }
       }
     }
 

@@ -12,7 +12,8 @@
             $this->load->database();
             $this->load->library('session');
             $this->load->helper(array('form','url'));
-            $this->load->model('IndividualUser');
+            $this->load->model(array('IndividualUser','RatingInfo'));
+            $this->load->library('form_validation');
         }
 
         public function viewProfile() {
@@ -124,6 +125,44 @@
         public function verifyCorporateUser() {
             $list = explode(',', $_POST['data']);
             $this->IndividualUser->verifyCorporateUser($list);
+        }
+
+        # rate user $userid
+        public function rateUser($userid, $msg='') {
+            $data['userid'] = $userid;
+            $data['title'] = 'Rate user';
+            $data['UserInformation'] = $this->IndividualUser->getProfile($userid);
+
+            if(isset($msg))
+            { $data['msg'] = $msg;
+            }
+
+            $this->load->view('templates/header',$data);
+            $this->load->view('rate_user',$data);
+            $this->load->view('templates/footer');
+        }
+
+        # submit rate user $userid
+        # need to check validation
+        public function submitRateUser($userid) {
+          $this->form_validation->set_rules('rating', 'Rating', 'required|in_list[1,2,3,4,5]');
+          if ($this->form_validation->run() == FALSE){
+              $this->rateUser($userid,'Error in input data. Input again.');
+          }
+          else{
+            if ($this->RatingInfo->existUserRating($_SESSION['id'],$userid)) {
+              $this->rateUser($userid,"Rating for this user exists.");
+            }
+            else {
+            $data['id'] = $userid;
+            $data['rateUser'] = $this->RatingInfo->submitRateUser($_SESSION['id'],$userid);
+            $data['msg'] = 'Submit rating successfully.';
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('submit_rate_user', $data);
+            $this->load->view('templates/footer');
+            }
+          }
         }
 
     }
