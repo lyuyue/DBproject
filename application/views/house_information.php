@@ -1,3 +1,5 @@
+<b> <?php echo $msg.'<br />'.'<br />';?></b>
+
 <b> <?php echo 'HOUSE INFORMATION'.'<br />';?></b>
 <?php
 /**
@@ -49,6 +51,16 @@
   <a href="<?php echo site_url("Review/create/".$houseInformation_item['id']); ?>"
     >Add Review</a>
 </button>
+
+<?php
+  if($sellerInformation['id'] == $_SESSION['id']){
+    $url = site_url('HouseInformation/editPost/'.$houseInformation_item['id']);
+    echo '<button> <a href="'.$url.'"> Edit House Information</a> </button>';
+
+    $url = site_url('HouseInformation/deletePost/'.$houseInformation_item['id']);
+    echo '<button> <a href="'.$url.'"> Delete House Information</a> </button>';
+  }
+?>
 
 <p><a href="<?php echo site_url('Tag/addTag'."/".$houseInformation_item['id']); ?>">Add Tag To The House</a></p>
 <p></p>

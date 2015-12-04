@@ -82,8 +82,6 @@ class HouseInformation extends CI_Controller {
     # delete post $id
     public function deletePost($id) {
       $data['id'] = $id;
-      $data['houseInformation_item'] = $this->Houseinfo->getHouseInformation($id);
-      $data['title'] = "House Information";
 
       $this->load->view('templates/header', $data);
       $this->load->view('delete_post', $data);
@@ -92,36 +90,10 @@ class HouseInformation extends CI_Controller {
 
     # submit delete post $id, set deleteStatus = 1.
     public function submitDeletePost($id) {
-        $data['id'] = $id;
-        $data['title'] = 'Delete Post';
         $data['houseInformation_item']=$this->Houseinfo->deletePost($id);
-        $data['msg'] = "Delete post.";
+        $msg = "Post has been deleted.";
 
-        $this->load->view('templates/header',$data);
-        $this->load->view('delete_post',$data);
-        $this->load->view('templates/footer');
-    }
-
-    # get statistics of all tags
-    public function getTagStatistics($id) {
-      $data['id'] = $id;
-      $data['tagStatistics'] = $this->Houseinfo->getTagStatistics($id);
-      $data['title'] = "Statistics of Tag";
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('get_tag_statistics', $data);
-      $this->load->view('templates/footer');
-    }
-
-    # get view times of post $id
-    public function getViewTimes($id) {
-      $data['id'] = $id;
-      $data['viewTimes'] = $this->Houseinfo->getViewTimes($id);
-      $data['title'] = "View Times of Post";
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('get_view_times', $data);
-      $this->load->view('templates/footer');
+        $this->view($id,$msg,0);
     }
 
     # set post $id as pin

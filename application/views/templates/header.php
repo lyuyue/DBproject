@@ -78,6 +78,9 @@
                 echo '</ul>
                 </li>';
             }
+            IF (isset($_SESSION['login'])) {
+                $url = site_url('HouseInformation/newPost');
+                echo '<li role="presentation"><a href="'.$url.'">New Post</a></li>';
+              }
         ?>
     </ul>
-
