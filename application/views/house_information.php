@@ -1,3 +1,4 @@
+<b> <?php echo 'HOUSE INFORMATION'.'<br />';?></b>
 <?php
 /**
  * Created by PhpStorm.
@@ -5,7 +6,6 @@
  * Date:  11/14/15
  * Time:  9: 54 PM
  */
-    echo $msg.'<br />';
     echo 'location : '.$houseInformation_item['location'].'<br />';
     echo 'build year : '.$houseInformation_item['buildYear'].'<br />';
     echo 'bedroom number : '.$houseInformation_item['brNumber'].'<br />';
@@ -16,18 +16,51 @@
     echo 'update time : '.$houseInformation_item['updateTime'].'<br />';
     echo 'view times : '.$houseInformation_item['viewTimes'].'<br />';
     echo 'averageRating : '.$houseInformation_item['averageRating'].'<br />';
-	
 ?>
 
-	<p><a href="<?php echo site_url('Tag/addTag'."/".$houseInformation_item['id']); ?>">Add Tag To The House</a></p>
-	<p></p>
-	<p><a href="<?php echo site_url('Tag/create'); ?>">Add Tag To The Tag Library</a></p>
+<p></p>
+<b> <?php echo 'SELLER INFORMATION'.'<br />';?></b>
+<?php
+    echo 'username : '.$sellerInformation['username'].'<br />';
+    echo 'email : '.$sellerInformation['email'].'<br />';
+    echo 'phone : '.$sellerInformation['phone'].'<br />';
+    echo 'averageRating : '.$sellerInformation['averageRating'].'<br />';
+    if($corpInformation['id']){
+      echo 'corpName : '.$corpInformation['corpName'].'<br />';
+      echo 'registeredTime : '.$corpInformation['registeredTime'].'<br />';
+      echo 'verificationTime : '.$corpInformation['verificationTime'].'<br />';
+    }
+?>
+<img src="<?php
+      if(file_exists('images/'. $houseInformation_item['largeImage'])){
+        echo '/images/'. $houseInformation_item['largeImage'];
+      }?>" />
+      
+<p></p>
+<button>
+  <a href="<?php echo site_url("UserRating/rateUser/".$sellerInformation['id']); ?>"
+    >Rate Seller</a>
+</button>
+<button>
+  <a href="<?php echo site_url("HouseInformation/houseRating/".$houseInformation_item['id']); ?>"
+    >Rate House</a>
+</button>
+<button>
+  <a href="<?php echo site_url("Review/create/".$houseInformation_item['id']); ?>"
+    >Add Review</a>
+</button>
 
+<p><a href="<?php echo site_url('Tag/addTag'."/".$houseInformation_item['id']); ?>">Add Tag To The House</a></p>
+<p></p>
+<p><a href="<?php echo site_url('Tag/create'); ?>">Add Tag To The Tag Library</a></p>
 
+<hr />
+<b> <?php echo 'TAGS'.'<br />';?></b>
+<?php foreach ($tagStatistics as $ts_item):
+        echo ' tag: '.$ts_item['tagId'].', counts: '.$ts_item['counts'].'<br />';
+      endforeach; ?>
 
+<hr />
+<b> <?php echo 'REVIEWS'.'<br />';?></b>
 
-    <img src="<?php
-
-                if(file_exists('images/'. $houseInformation_item['largeImage'])){
-                echo '/images/'. $houseInformation_item['largeImage'];
-                }?>" />
+<hr />

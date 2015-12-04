@@ -28,6 +28,10 @@ class HouseInformation extends CI_Controller {
         $data['title'] = "House Information";
         $data['msg'] = $msg;
 
+        $data['tagStatistics'] = $this->Houseinfo->getTagStatistics($id);
+        $data['sellerInformation'] = $this->Houseinfo->getSellerInformation($id);
+        $data['corpInformation'] = $this->Houseinfo->getCorpInformation($id);
+
         $this->load->view('templates/header', $data);
         $this->load->view('house_information', $data);
         $this->load->view('templates/footer');
@@ -96,28 +100,6 @@ class HouseInformation extends CI_Controller {
         $this->load->view('templates/header',$data);
         $this->load->view('delete_post',$data);
         $this->load->view('templates/footer');
-    }
-
-    # get information of seller
-    public function getSellerInformation($id) {
-      $data['id'] = $id;
-      $data['sellerInformation'] = $this->Houseinfo->getSellerInformation($id);
-      $data['title'] = "Seller's Information";
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('get_seller_information', $data);
-      $this->load->view('templates/footer');
-    }
-
-    # get average rating of a post
-    public function getPostAverageRating($id) {
-      $data['id'] = $id;
-      $data['postAverageRating'] = $this->Houseinfo->getPostAverageRating($id);
-      $data['title'] = "Average Rating";
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('get_post_average_rating', $data);
-      $this->load->view('templates/footer');
     }
 
     # get statistics of all tags

@@ -73,9 +73,11 @@ class Houseinfo extends CI_Model {
     return $query->row_array();
     }
 
-    # get average rating of a post
-    public function getPostAverageRating($id) {
+    # get corp's information
+    public function getCorpInformation($id) {
     $query = $this->db->get_where('HouseInformation', array('id' => $id));
+    $row = $query->row();
+    $query = $this->db->get_where('CorporateUser', array('id' => $row->postedBy,'verified' => 1));
     return $query->row_array();
     }
 
