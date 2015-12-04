@@ -14,9 +14,13 @@ class Taginfo extends CI_Model{
 		return $query->row_array();
 	}
 	public function creatTag()
-	{
-		$data['description'] = $this->input->post['description'];
+	{	
+		$data['description'] = $this->input->post('description');
 		$this->db->insert('Tag', $data);
+	}
+	public function check($name)
+	{
+		return $query=$this->db->get_where('Tag',array('description'=>$name));
 	}
 	public function getTagStat($id){
 		$sql = "select t.* from Tag t, TagStatistics ts where ts.tagId=t.id and ts.usedBy = ?";

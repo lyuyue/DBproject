@@ -20,14 +20,14 @@
 ?>
 
 	<p><a href="<?php echo site_url('Tag/addTag'."/".$houseInformation_item['id']); ?>">Add Tag To The House</a></p>
+	<p></p>
+	<p><a href="<?php echo site_url('Tag/create'); ?>">Add Tag To The Tag Library</a></p>
 
 
-<<<<<<< HEAD
-  <!--  <img src="<?php
-=======
+
+
     <img src="<?php
->>>>>>> 4e98f897419d1cd0d082a584c730ded09d762fcc
+
                 if(file_exists('images/'. $houseInformation_item['largeImage'])){
                 echo '/images/'. $houseInformation_item['largeImage'];
                 }?>" />
--->
