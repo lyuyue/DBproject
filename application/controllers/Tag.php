@@ -5,6 +5,8 @@ class Tag extends CI_Controller
 	{
 		parent:: __construct();
 		$this->load->model('Taginfo');
+		$this->load->library('session','form_validation');
+        $this->load->helper(array('form','url','date'));
 	}
 	public function index()
 	{
@@ -29,7 +31,30 @@ class Tag extends CI_Controller
 		
 	}
 	else {
+		echo "Tag create succesfully~!0_o~~";
 		$this->Taginfo->creatTag();
 	}
+	}
+	public function addTag($house)
+	{
+		$data['user']=$_SESSION['id'];
+		$data['house']=$house;
+		$data['title']="Add Tag";
+		$data['tag']=$this->Taginfo->getTagStat($house);
+		$selection = $this->input->post('selection');
+		
+		if($selection)
+		{
+			echo "Succesfully added tag to the house :)";
+			$this->Taginfo->addTag($house,$selection);
+		}
+		else
+		{
+		echo "Please select a tag to add :( ~~~";		
+		$this->load->view('templates/header',$data);
+		$this->load->view('add_tag',$data);
+		$this->load->view('templates/footer',$data);
+		}
+		
 	}
 	}
