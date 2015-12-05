@@ -122,7 +122,7 @@ class HouseInformation extends CI_Controller {
       $data['title'] = "Pin Posts";
 
       $this->load->view('templates/header', $data);
-      $this->load->view('set_pin', $data);
+      $this->load->view('main', $data);
       $this->load->view('templates/footer');
     }
 
@@ -135,7 +135,7 @@ class HouseInformation extends CI_Controller {
     $this->load->view('post_verification');
     $this->load->view('templates/footer');
     }
-    
+
     # verify post $id
     # need to check whether user is admin
     public function verifyPost() {

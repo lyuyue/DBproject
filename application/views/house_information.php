@@ -59,6 +59,9 @@
 
     $url = site_url('HouseInformation/deletePost/'.$houseInformation_item['id']);
     echo '<button> <a href="'.$url.'"> Delete House Information</a> </button>';
+
+    $url = site_url('HouseInformation/setPin/'.$houseInformation_item['id']);
+    echo '<button> <a href="'.$url.'"> Set Pin</a> </button>';
   }
 ?>
 <button>
