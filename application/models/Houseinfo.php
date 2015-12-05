@@ -35,7 +35,6 @@ class Houseinfo extends CI_Model {
     public function newPost($id) {
       date_default_timezone_set('UTC');
       $data = array(
-        'largeImage' => $this->input->post('largeImage'),
         'typeName' => $this->input->post('typeName'),
         'buildYear' => $this->input->post('buildYear'),
         'location' => $this->input->post('location'),
@@ -52,6 +51,26 @@ class Houseinfo extends CI_Model {
       );
       $this->db->insert('HouseInformation', $data);
       return $this->db->insert_id();
+    }
+
+    public function updateImage($id,$image){
+      $data = array('largeImage' => $image,'listImage' => 'list_'.$image);
+      $this->db->where('id',$id);
+      $query = $this->db->update('HouseInformation', $data);
+
+      # create a list image
+      $config['image_library'] = 'gd2';
+      $config['source_image'] = 'images/'.$image;
+      $config['new_image'] = 'images/list_'.$image;
+      $config['maintain_ratio'] = TRUE;
+      $config['width']     = 75;
+      $config['height']   = 50;
+
+      $this->load->library('image_lib', $config);
+      $this->image_lib->resize();
+
+      $query = $this->db->get_where('HouseInformation', array('id' => $id));
+      return $query->row_array();
     }
 
     # delete post $id
@@ -129,7 +148,6 @@ class Houseinfo extends CI_Model {
     public function editPost($id) {
       date_default_timezone_set('UTC');
       $data = array(
-        'largeImage' => $this->input->post('largeImage'),
         'typeName' => $this->input->post('typeName'),
         'buildYear' => $this->input->post('buildYear'),
         'location' => $this->input->post('location'),
