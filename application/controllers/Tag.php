@@ -51,7 +51,7 @@ class Tag extends CI_Controller
 		$data['user']=$_SESSION['id'];
 		$data['house']=$house;
 		$data['title']="Add Tag";
-		$data['tag']=$this->Taginfo->getTagStat($house);
+		$data['tag']=$this->Taginfo->getTagInformation();
 		$selection = $this->input->post('selection');
 		
 		if($selection)
