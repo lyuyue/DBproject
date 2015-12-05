@@ -133,15 +133,21 @@ class Houseinfo extends CI_Model {
       return $query->result_array();
     }
 
-    # verify post $id
-    public function verifyPost($id) {
-      # set verified to 1
-      $data = array('verified' => 1);
-      $this->db->where('id',$id);
-      $query = $this->db->update('HouseInformation', $data);
+    public function unverifiedPost() {
+      $this->db->select('HouseInformation.*, IndividualUser.username');
+      $this->db->from('HouseInformation');
+      $this->db->join('IndividualUser', 'IndividualUser.id = HouseInformation.postedBy');
+      $this->db->where(array('HouseInformation.verified' => 0));
 
-      $query = $this->db->get_where('HouseInformation', array('id' => $id));
-      return $query->row_array();
+      $query = $this->db->get();
+      $rows = $query->result();
+      return json_encode(array('data' => $rows));
+    }
+
+    public function verifyPost($ids) {
+        foreach ($ids as $id) {
+            $this->db->update('HouseInformation', array('verified' => 1), array('id' => $id));
+        }
     }
 
     # update post $id

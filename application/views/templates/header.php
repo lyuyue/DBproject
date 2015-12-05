@@ -73,6 +73,8 @@
                     <ul class="dropdown-menu">';
                 $url = site_url("UserInformation/viewUnverifiedCorp");
                 echo '<li><a href="'.$url.'">Verify Corporate</a></li>';
+                
+                $url = site_url("HouseInformation/verifyAllPost");
                 echo '<li><a href="#">Verify Post</a></li>';
 
                 echo '</ul>

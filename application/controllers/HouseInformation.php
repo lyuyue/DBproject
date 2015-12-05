@@ -126,16 +126,21 @@ class HouseInformation extends CI_Controller {
       $this->load->view('templates/footer');
     }
 
+    public function unverifiedPost() {
+    echo $this->Houseinfo->unverifiedPost();
+    }
+
+    public function verifyAllPost() {
+    $this->load->view('templates/header');
+    $this->load->view('post_verification');
+    $this->load->view('templates/footer');
+    }
+    
     # verify post $id
     # need to check whether user is admin
-    public function verifyPost($id) {
-      $data['id'] = $id;
-      $data['verifiedPost'] = $this->Houseinfo->verifyPost($id);
-      $data['title'] = "Post verification";
-
-      $this->load->view('templates/header', $data);
-      $this->load->view('verify_post', $data);
-      $this->load->view('templates/footer');
+    public function verifyPost() {
+        $list = explode(',', $_POST['data']);
+        $this->Houseinfo->verifyPost($list);
     }
 
     # update post $id
