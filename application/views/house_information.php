@@ -61,11 +61,13 @@
     echo '<button> <a href="'.$url.'"> Delete House Information</a> </button>';
   }
 ?>
+<button>
+<a href="<?php echo site_url('Tag/addTag'."/".$houseInformation_item['id']); ?>">Add Tag To The House</a>
+</button>
 
-<p><a href="<?php echo site_url('Tag/addTag'."/".$houseInformation_item['id']); ?>">Add Tag To The House</a></p>
-<p></p>
-<p><a href="<?php echo site_url('Tag/create'); ?>">Add Tag To The Tag Library</a></p>
-
+<button>
+<a href="<?php echo site_url('Tag/create'); ?>">Add Tag To The Tag Library</a>
+</button>
 <hr />
 <b> <?php echo 'TAGS'.'<br />';?></b>
 <?php foreach ($tagStatistics as $ts_item):
