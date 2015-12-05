@@ -74,9 +74,27 @@ class HouseInformation extends CI_Controller {
           else
           { $id=$this->Houseinfo->newPost($_SESSION['id']);
             $msg = "New a post successfully.";
-            $update_view_times = 0;
-            $this->view($id,$msg,$update_view_times);
+            $this->uploadImage($id,$msg);
           }
+    }
+
+    # upload image for post $id
+    public function uploadImage($id,$msg=''){
+      $config['upload_path']      = './images/';
+      $config['allowed_types']    = 'jpg|png';
+      $this->load->library('upload', $config);
+
+      if ( ! $this->upload->do_upload('userfile'))
+      { $data['error'] = array('error' => $this->upload->display_errors());
+        $data['id'] = $id;
+        $this->load->view('upload_image', $data);
+      }
+      else
+      { $data = array('upload_data' => $this->upload->data());
+        $this->Houseinfo->updateImage($id,$data['upload_data']['file_name']);
+        $update_view_times = 0;
+        $this->view($id,$msg,$update_view_times);
+      }
     }
 
     # delete post $id
@@ -147,8 +165,7 @@ class HouseInformation extends CI_Controller {
           else
           { $this->Houseinfo->editPost($id);
             $msg = "Update post successfully.";
-            $update_view_times = 0;
-            $this->view($id,$msg,$update_view_times);
+            $this->uploadImage($id,$msg);
           }
     }
 

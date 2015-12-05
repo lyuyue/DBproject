@@ -11,6 +11,5 @@ echo $msg.'<br />'.'<br />';
     price: <input type="number" name="price" id="price" value="" size=20>
     description: <input type="text" name="description" id="description" value="" size=20>
     type name (1-apartment,2-house): <input type="number" name="typeName" id="typeName" value="" size=20>
-    image name: <input type="text" name="largeImage" id="largeImage" value="" size=20>
     <input type="submit" name="btnNew" class="btn" value = "Submit">
   </form>

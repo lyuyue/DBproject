@@ -9,6 +9,6 @@ echo $title;
         price: <input type="number" name="price" id="price" value="<?php echo $post['price']; ?>" size=20>
         description: <input type="text" name="description" id="description" value="<?php echo $post['description']; ?>" size=20>
         type name(1-apartment,2-house): <input type="number" name="typeName" id="typeName" value="<?php echo $post['typeName']; ?>" size=20>
-        image name: <input type="text" name="largeImage" id="largeImage" value="<?php echo $post['largeImage']; ?>" size=20>
+    
         <input type="submit" name="btnNew" class="btn" value = "Update">
     </form>
