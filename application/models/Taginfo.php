@@ -20,7 +20,8 @@ class Taginfo extends CI_Model{
 	}
 	public function check($name)
 	{
-		return $query=$this->db->get_where('Tag',array('description'=>$name));
+		$query=$this->db->get_where('Tag',array('description'=>$name));
+		return $query->num_rows();
 	}
 	public function getTagStat($id){
 		$sql = "select t.* from Tag t, TagStatistics ts where ts.tagId=t.id and ts.usedBy = ?";

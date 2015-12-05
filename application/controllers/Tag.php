@@ -14,7 +14,10 @@ class Tag extends CI_Controller
 	public function index()
 	{
 		$data['tag'] =$this->Taginfo->getTagInformation();
-		$data['title'] = 'Tag archive';		
+		$data['title'] = 'Tag archive';	
+		$this->load->view('templates/header', $data);
+		$this->load->view('tag_information');
+		$this->load->view('templates/footer', $data);	
 	}
 	public function create()
 	{
@@ -33,7 +36,7 @@ class Tag extends CI_Controller
 	}
 	else {
 		$check = $this->Taginfo->check($this->input->post('description'));
-		if($check)
+		if($check>0)
 		{
 		    echo "Tag already exsits.Create another tag"; 
 			$this->load->view('templates/header', $data);
