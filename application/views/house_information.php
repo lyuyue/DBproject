@@ -79,5 +79,8 @@
 
 <hr />
 <b> <?php echo 'REVIEWS'.'<br />';?></b>
+<?php foreach ($reviewInfo as $review_item):
+        echo ' posted by: '.$review_item['postedBy'].', description: '.$review_item['description'].'<br />';
+      endforeach; ?>
 
 <hr />
