@@ -73,8 +73,8 @@ class HouseInformation extends CI_Controller {
           }
           else
           { $id=$this->Houseinfo->newPost($_SESSION['id']);
-            $msg = "New a post successfully.";
-            $this->uploadImage($id,$msg);
+            $msg = "New a post successfully. Wait for the approval of administrator.";
+            $this->newPost($msg);
           }
     }
 
