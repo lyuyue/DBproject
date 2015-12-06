@@ -69,7 +69,7 @@
 			{
 				echo "Must add some content to the description~!! o_0~~";	
 				$this->load->view('templates/header', $data);
-				$this->load->view('create_review', $data);
+				$this->load->view('edit_review', $data);
 				$this->load->view('templates/footer', $data);
 		
 			}
