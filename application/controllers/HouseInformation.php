@@ -82,12 +82,12 @@ class HouseInformation extends CI_Controller {
           }
           else
           { $id=$this->Houseinfo->newPost($_SESSION['id']);
-            $this->uploadImage($id);
+          $this->editPost($id);
           }
     }
 
     # upload image for post $id
-    public function uploadImage($id,$msg=''){
+    public function uploadImage($id,$image_type,$msg=''){
       $config['upload_path']      = './images/';
       $config['allowed_types']    = 'jpg|png';
       $this->load->library('upload', $config);
@@ -95,13 +95,13 @@ class HouseInformation extends CI_Controller {
       if ( ! $this->upload->do_upload('userfile'))
       { $data['error'] = array('error' => $this->upload->display_errors());
         $data['id'] = $id;
+        $data['imageType'] = $image_type;
         $this->load->view('upload_image', $data);
       }
       else
       { $data = array('upload_data' => $this->upload->data());
-        $this->Houseinfo->updateImage($id,$data['upload_data']['file_name']);
-        $update_view_times = 0;
-        $this->view($id,$msg,$update_view_times);
+        $this->Houseinfo->updateImage($id,$data['upload_data']['file_name'],$image_type);
+        $this->editPost($id);
       }
     }
 
@@ -173,8 +173,8 @@ class HouseInformation extends CI_Controller {
           }
           else
           { $this->Houseinfo->editPost($id);
-            $msg = "Update post successfully.";
-            $this->uploadImage($id,$msg);
+            $msg='';
+            $this->view($id,$msg,0);
           }
     }
 
