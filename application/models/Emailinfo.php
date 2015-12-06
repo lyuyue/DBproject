@@ -7,37 +7,28 @@ class Emailinfo extends CI_Model{
 	}
 	public function getEmaillist($id)
 	{
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-			$sql = "select e.*, r.receivedBy, r.readStatus from Email AS e, ReadStatus AS r where r.receive=e.id and e.sentBy = ? or r.receivedBy = ?";
-=======
->>>>>>> Stashed changes
-			$sql = "select e.id, e.sendTime, e.content,e.title, iu.username as sender, ir.username as receiver, r.readStatus 
-					from 
+		$sql = "select e.id, e.sendTime, e.content,e.title, iu.username as sender, ir.username as receiver, r.readStatus
+					from
 					IndividualUser ir
 					RIGHT JOIN
-					IndividualUser iu 
-					RIGHT JOIN 
+					IndividualUser iu
+					RIGHT JOIN
 					ReadStatus AS r INNER JOIN Email AS e  ON e.id=r.receive
 					ON  iu.id=e.sentBy
 					ON  ir.id=r.receivedBy
 					WHERE e.sentBy = ? or r.receivedBy = ?;";
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
+
 			$query = $this->db->query($sql, array($id,$id));
 			return $query->result_array();
 	}
 	public function getEmailDetail($id)
 	{
-		$sql = "select e.id, e.sendTime, e.content,e.title, iu.username as sender, ir.username as receiver, r.readStatus 
-				from 
+		$sql = "select e.id, e.sendTime, e.content,e.title, iu.username as sender, ir.username as receiver, r.readStatus
+				from
 				IndividualUser ir
 				RIGHT JOIN
-				IndividualUser iu 
-				RIGHT JOIN 
+				IndividualUser iu
+				RIGHT JOIN
 				ReadStatus AS r INNER JOIN Email AS e  ON e.id=r.receive
 				ON  iu.id=e.sentBy
 				ON  ir.id=r.receivedBy
@@ -53,42 +44,19 @@ class Emailinfo extends CI_Model{
 		'sendTime' => date('Y-m-d'),
 		'content' => $this->input->post('content')
 		);
-<<<<<<< Updated upstream
-		
+
 		$this->db->insert('Email',$data);
 		$emailId = $this->db->insert_id();
-		
+
 		$data = array (
 		'receive' => $emailId,
 		'receivedBy' => $this->input->post('sendTo'),
-		'readStatus' => FALSE);
-=======
-<<<<<<< HEAD
+		'readStatus' => 0);
 
-		$this->db->insert('Email',$data1);
-		$emailId = $this->db->insert_id();
 
-		$data2 = array (
-		'receive' => $emailId,
-		'receivedBy' => $this->input->post('sendTo'),
-		'readStatus' => FALSE);
-
-		$this->db->insert('ReadStatus',$data2);
-
-=======
-		
-		$this->db->insert('Email',$data);
-		$emailId = $this->db->insert_id();
-		
-		$data = array (
-		'receive' => $emailId,
-		'receivedBy' => $this->input->post('sendTo'),
-		'readStatus' => FALSE);
->>>>>>> Stashed changes
-		
 		$this->db->insert('ReadStatus',$data);
-		
->>>>>>> origin/master
+
+
 	}
 	public function receiver($id)
 	{
@@ -97,16 +65,8 @@ class Emailinfo extends CI_Model{
 	}
 	public function unreadEmail($id)
 	{
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-			$sql = "select e.* from Email AS e, ReadStatus AS r where r.receive=e.id and r.receivedBy = ?";
-			$query = $this->db->query($sql, $id);
-=======
->>>>>>> Stashed changes
 			$sql = "select e.* from ReadStatus AS r JOIN Email AS e  ON e.id=r.receive WHERE r.receivedBy = ?";
 			$query = $this->db->query($sql, $id);			
->>>>>>> origin/master
 			return $query->result_array();
 	}
 	public function update_status($email,$user)
