@@ -21,6 +21,8 @@
                 $data = $this->IndividualUser->getProfile($_SESSION['id']);
                 $data['title'] = 'My Profile';
 
+                $data['authority'] = $this->IndividualUser->getAuthority($_SESSION['usertype']);
+
                 $this->load->view('templates/header',$data);
                 $this->load->view('user_profile',$data);
                 $this->load->view('templates/footer');

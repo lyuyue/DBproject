@@ -51,6 +51,12 @@ class IndividualUser extends CI_Model {
         );
     }
 
+    public function getAuthority($usertype) {
+        $sql = "select p.privilege from Privilege p join Authority a on p.id = a.authority where a.typeName = $usertype;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function resetPassword($id, $new_pwd) {
         $sql = "update IndividualUser set password = '$new_pwd' where id = $id";
         return $this->db->query($sql);
