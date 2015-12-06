@@ -10,7 +10,7 @@ class HouseInformation extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('Houseinfo','RatingInfo','ReviewInfo'));
+        $this->load->model(array('Houseinfo','RatingInfo','ReviewInfo','Emailinfo'));
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('form','url','date'));
     }
@@ -126,7 +126,7 @@ class HouseInformation extends CI_Controller {
     # need to check whether user is admin, need to check the row num of results
     public function setPin($id) {
       $this->Houseinfo->setPin($id);
-
+      $this->Emailinfo->setPinNotification($id);
       redirect('/main');
     }
 
