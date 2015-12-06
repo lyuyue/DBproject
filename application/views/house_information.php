@@ -85,8 +85,12 @@
           $url = site_url('Review/edit/'.$houseInformation_item['id']);
           echo '<a href="'.$url.'"> Edit Review</a> ';
 
-            $url = site_url('Review/delete/'.$houseInformation_item['id']);
-            echo '<a href="'.$url.'"> Delete Review</a> ';
+          echo "  ";
+
+          $url = site_url('Review/delete/'.$houseInformation_item['id']);
+          echo '<a href="'.$url.'"> Delete Review</a> ';
+
+          echo '<br />';
         }
       endforeach; ?>
 
