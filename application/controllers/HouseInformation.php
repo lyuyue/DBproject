@@ -11,7 +11,7 @@ class HouseInformation extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model(array('Houseinfo','RatingInfo'));
-        $this->load->library('session','form_validation');
+        $this->load->library(array('session','form_validation'));
         $this->load->helper(array('form','url','date'));
     }
 
