@@ -75,7 +75,7 @@
                 echo '<li><a href="'.$url.'">Verify Corporate</a></li>';
 
                 $url = site_url("HouseInformation/verifyAllPost");
-                echo '<li><a href="'.$url'">Verify Post</a></li>';
+                echo '<li><a href="'.$url.'">Verify Post</a></li>';
 
                 echo '</ul>
                 </li>';
