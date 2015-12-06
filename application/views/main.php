@@ -39,7 +39,13 @@
                         },
                         {
                             'aTargets': [1],
-                            'mData': 'listImage',
+                            'mData':
+                            <?php
+                                if (isset($_SESSION['viewPreference']) && ($_SESSION['viewPreference'] ==1)) {
+                                    echo  "'largeImage',";
+                                } else { echo "'listImage',";}
+                            ?>
+
                             'mRender' : function (data, type, full) {
                                 return "<img src='/images/"+data+"' />";
                             }

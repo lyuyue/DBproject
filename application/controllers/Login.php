@@ -34,6 +34,7 @@ class Login extends CI_Controller {
         $this->session->set_userdata("username", $data['username']);
         $this->session->set_userdata("password", $data['password']);
         $this->session->set_userdata('usertype', $data['usertype']);
+        $this->session->set_userdata('viewPreference', $data['viewPreference']);
         redirect("/main");
     }
 
@@ -56,7 +57,11 @@ class Login extends CI_Controller {
             if ($result['status'] == 0) {
                 $this->login_err('Username and Password do not match');
             } else {
-                $data = array("id" => $result["id"], "username" => $username, "password" => $password, "usertype" => $result['usertype']);
+                $data = array("id" => $result["id"],
+                              "username" => $username,
+                              "password" => $password,
+                              "usertype" => $result['usertype'],
+                              "viewPreference" => $result['viewPreference']);
                 $this->login_success($data);
             }
         }
