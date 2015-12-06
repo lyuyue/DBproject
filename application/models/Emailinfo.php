@@ -48,4 +48,40 @@ class Emailinfo extends CI_Model{
 			$query = $this->db->query($sql, $id);			
 			return $query->result_array();
 	}
+
+
+	public function corpVerifiedNotification($ids) {
+		$emailid = $this->corpVerification($_SESSION['id']);
+		foreach ($ids as $id) {
+			if ($id == "") {continue;}
+			$this->addReadStatus($emailid, $id);
+		}
+
+	}
+	public function corpVerification($id) {
+		$this->db->insert(
+			"Email",
+			array(
+				'sentBy' => $id,
+				'title' => 'Verification Success',
+				'sendTime' => date("Y-m-d"),
+				'content' => 'Your Corporate User application has been approved'
+			)
+		);
+		$emailid = $this->db->insert_id();
+		return $emailid;
+	}
+
+	public function addReadStatus($emailid, $receiverid) {
+
+		$this->db->insert(
+			"ReadStatus",
+			array(
+				'receive' => $emailid,
+				'receivedBy' => $receiverid,
+				'readStatus' => 0
+			)
+		);
+		echo 1;
+	}
 }

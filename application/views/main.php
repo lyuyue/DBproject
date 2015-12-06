@@ -47,7 +47,7 @@
                             ?>
 
                             'mRender' : function (data, type, full) {
-                                return "<img src='/images/"+data+"' />";
+                                return "<img src='/images/"+data+"' width = '50' height = '50' />";
                             }
                         },
                         {

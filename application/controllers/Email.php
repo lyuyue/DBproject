@@ -73,5 +73,4 @@ class Email extends CI_Controller
 				return FALSE;
 			}
 	}
-	
 }

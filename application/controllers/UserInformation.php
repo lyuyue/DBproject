@@ -12,7 +12,7 @@
             $this->load->database();
             $this->load->library('session');
             $this->load->helper(array('form','url'));
-            $this->load->model(array('IndividualUser','RatingInfo'));
+            $this->load->model(array('IndividualUser','RatingInfo', 'Emailinfo'));
             $this->load->library('form_validation');
         }
 
@@ -124,7 +124,10 @@
 
         public function verifyCorporateUser() {
             $list = explode(',', $_POST['data']);
+            foreach ($list as $val) {echo $val;
+            echo "<br>";}
             $this->IndividualUser->verifyCorporateUser($list);
+            $this->Emailinfo->corpVerifiedNotification($list);
         }
 
         # rate user $userid
