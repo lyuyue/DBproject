@@ -40,6 +40,17 @@ class IndividualUser extends CI_Model {
                 );
     }
 
+    public function updateProfile($id, $email, $phone) {
+        $this->db->update(
+          "IndividualUser",
+            array(
+              'email' => $email,
+                'phone' => $phone
+            ),
+            array('id' => $id)
+        );
+    }
+
     public function resetPassword($id, $new_pwd) {
         $sql = "update IndividualUser set password = '$new_pwd' where id = $id";
         return $this->db->query($sql);
