@@ -1,6 +1,6 @@
 <?php
-echo $msg.'<br />'.'<br />';
-echo $title;
+echo $msg.'<br />';
+echo $title.'<br />';
 ?>
 
 <?php

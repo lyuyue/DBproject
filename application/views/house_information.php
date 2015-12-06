@@ -84,6 +84,9 @@
         if( $_SESSION['id'] == $review_item['postedBy'] || $_SESSION['usertype'] == 4){
           $url = site_url('Review/edit/'.$houseInformation_item['id']);
           echo '<a href="'.$url.'"> Edit Review</a> ';
+
+            $url = site_url('Review/delete/'.$houseInformation_item['id']);
+            echo '<a href="'.$url.'"> Delete Review</a> ';
         }
       endforeach; ?>
 
