@@ -10,7 +10,7 @@ class HouseInformation extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('Houseinfo','RatingInfo'));
+        $this->load->model(array('Houseinfo','RatingInfo','ReviewInfo'));
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('form','url','date'));
     }
@@ -31,6 +31,7 @@ class HouseInformation extends CI_Controller {
         $data['tagStatistics'] = $this->Houseinfo->getTagStatistics($id);
         $data['sellerInformation'] = $this->Houseinfo->getSellerInformation($id);
         $data['corpInformation'] = $this->Houseinfo->getCorpInformation($id);
+        $data['reviewInfo'] = $this->ReviewInfo->getHouseReview($id);
 
         $this->load->view('templates/header', $data);
         $this->load->view('house_information', $data);
@@ -73,8 +74,8 @@ class HouseInformation extends CI_Controller {
           }
           else
           { $id=$this->Houseinfo->newPost($_SESSION['id']);
-            $msg = "New a post successfully.";
-            $this->uploadImage($id,$msg);
+            $msg = "New a post successfully. Wait for the approval of administrator.";
+            $this->newPost($msg);
           }
     }
 

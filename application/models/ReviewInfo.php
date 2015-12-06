@@ -26,6 +26,11 @@
 			$sql = "select Review.description from Review where postedBy = ? AND belongsTo = ? ";
 			return $this->db->query($sql, array($id,$house));
 		}
+		public function getHouseReview($house)
+		{
+			$query = $this->db->get_where('Review',array("belongsTo"=>$house));
+			return $query->result_array();
+		}
 		public function createReview($id,$house)
 		{
 			$data = array(
@@ -33,7 +38,7 @@
 			'belongsTo' => $house,
 			'description'=> $this->input->post('description')
 			);
-			
+
 			$this->db->insert('Review', $data);
 		}
 		public function editReview($id, $house){
@@ -42,7 +47,7 @@
 			'belongsTo' => $house,
 			'description'=> $this->input->post('description')
 			);
-			
+
 			$this->db->replace('Review', $data);
 		}
 		public function deleteReview($id,$house)
