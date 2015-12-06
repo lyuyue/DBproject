@@ -127,7 +127,7 @@ class HouseInformation extends CI_Controller {
     public function setPin($id) {
       $this->Houseinfo->setPin($id);
 
-      redirect('Main/allPosts');
+      redirect('Main/index');
     }
 
     public function unverifiedPost() {
