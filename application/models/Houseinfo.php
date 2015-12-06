@@ -60,7 +60,7 @@ class Houseinfo extends CI_Model {
 
       # create a list image
       $config['image_library'] = 'gd2';
-      $config['source_image'] = 'images/'.$image;
+      $config['source_image'] = '/images/'.$image;
       $config['new_image'] = '/images/list_'.$image;
       $config['maintain_ratio'] = TRUE;
       $config['width']     = 75;
