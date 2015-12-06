@@ -11,10 +11,4 @@
         <p>Email:      <?php echo $email; ?></p>
         <p>Phone:      <?php echo $phone; ?></p>
     </div>
-    <button onclick="editProfile">Edit Profile</button>
-
-<script type="text/javascript">
-    function editProfile() {
-        window.location.assign("UserInformation/editProfile");
-    }
-</script>
+    <button><a href="editProfile">Edit Profile</a></button>

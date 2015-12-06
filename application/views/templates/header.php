@@ -91,9 +91,3 @@
 
         ?>
     </ul>
-
-    <script type="text/javascript">
-        function changeView() {
-            window.location.assign("UserInformation/changeViewMode");
-        }
-        </script>
