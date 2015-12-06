@@ -126,7 +126,8 @@ class HouseInformation extends CI_Controller {
     # need to check whether user is admin, need to check the row num of results
     public function setPin($id) {
       $this->Houseinfo->setPin($id);
-      $this->Emailinfo->setPinNotification($id);
+      $data['houseInformation'] = $this->Houseinfo->getHouseInformation($id);
+      $this->Emailinfo->setPinNotification($data['houseInformation']['postedBy'],$id);
       redirect('/main');
     }
 

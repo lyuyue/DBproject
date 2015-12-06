@@ -66,7 +66,7 @@ class Emailinfo extends CI_Model{
 	public function unreadEmail($id)
 	{
 			$sql = "select e.* from ReadStatus AS r JOIN Email AS e  ON e.id=r.receive WHERE r.receivedBy = ?";
-			$query = $this->db->query($sql, $id);			
+			$query = $this->db->query($sql, $id);
 			return $query->result_array();
 	}
 	public function update_status($email,$user)
@@ -97,8 +97,8 @@ class Emailinfo extends CI_Model{
 		return $emailid;
 	}
 
-	public function setPinNotification($id) {
-		$emailid = $this->pinNotification($_SESSION['id'],$id);
+	public function setPinNotification($userid,$id) {
+		$emailid = $this->pinNotification($userid,$id);
 		$this->addReadStatus($emailid, $id);
 	}
 	public function pinNotification($userid,$postid) {
@@ -108,7 +108,7 @@ class Emailinfo extends CI_Model{
 				'sentBy' => $userid,
 				'title' => 'Post is set pin',
 				'sendTime' => date("Y-m-d"),
-				'content' => 'Your post'.$postid.'is been set pin.'
+				'content' => 'Your post'.$postid.' is been set pin.'
 			)
 		);
 		$emailid = $this->db->insert_id();
