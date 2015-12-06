@@ -21,10 +21,29 @@
                 $data = $this->IndividualUser->getProfile($_SESSION['id']);
                 $data['title'] = 'My Profile';
 
+                $data['authority'] = $this->IndividualUser->getAuthority($_SESSION['usertype']);
+
                 $this->load->view('templates/header',$data);
                 $this->load->view('user_profile',$data);
                 $this->load->view('templates/footer');
             }
+        }
+
+        public function editProfile() {
+            $data = $this->IndividualUser->getProfile($_SESSION['id']);
+            $data['title']="Edit Profile";
+
+            $this->load->view('templates/header',$data);
+            $this->load->view('edit_profile',$data);
+            $this->load->view('templates/footer');
+        }
+
+        public function editProfileSubmit() {
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+
+            $this->IndividualUser->updateProfile($_SESSION['id'], $email, $phone);
+            $this->viewProfile();
         }
 
         public function resetPassword($msg='') {

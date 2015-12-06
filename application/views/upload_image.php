@@ -1,4 +1,10 @@
-<b> <?php echo 'Upload image for post '.$id;?> <b/>
+<b> <?php
+      if($imageType == 1){
+      echo 'Upload large image for post '.$id;
+    }
+    else{
+      echo 'Upload list image for post '.$id;
+    } ?> <b/>
 
 <html>
 <head>
@@ -9,7 +15,7 @@
   <li><?php echo $item;?></li>
   <?php endforeach; ?>
 
-<?php echo form_open_multipart('HouseInformation/uploadImage/'.$id);?>
+<?php echo form_open_multipart('HouseInformation/uploadImage/'.$id.'/'.$imageType);?>
 <input type="file" name="userfile" size="20" />
 
 <br />
@@ -20,8 +26,3 @@
 
 </body>
 </html>
-
-</button>
-<?php
-    $url = site_url('HouseInformation/view/'.$id);
-    echo '<button> <a href="'.$url.'"> upload later</a> </button>';
