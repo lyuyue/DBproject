@@ -19,9 +19,12 @@ class IndividualUser extends CI_Model {
             $id = $row->id;
             $query = $this->db->get_where("User", array("id" => $row->id));
             $usertype = $query->row()->userType;
+            $query = $this->db->get_where("IndividualUser", array('id' => $id));
+            $viewPreference = $query->row()->viewPreference;
             return array('status' => 1,
                          'id' => $id,
-                         'usertype' => $usertype);
+                         'usertype' => $usertype,
+                         'viewPreference' => $viewPreference);
         } else {
             return array('status' => 0);
         }
@@ -56,7 +59,8 @@ class IndividualUser extends CI_Model {
             'username' => $username,
             'password' => $password,
             'email' => $email,
-            'phone' => $phone
+            'phone' => $phone,
+            'viewPreference' => 0
         );
         $this->db->insert('IndividualUser', $data);
     }
@@ -85,6 +89,10 @@ class IndividualUser extends CI_Model {
         foreach ($ids as $id) {
             $this->db->update('CorporateUser', array('verified' => 1), array('id' => $id));
         }
+    }
+
+    public function changeViewMode($id,$value) {
+        $this->db->update('IndividualUser', array('viewPreference' => 1-$value), array('id' => $id));
     }
 
 }

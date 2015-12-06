@@ -28,8 +28,12 @@
 		}
 		public function getHouseReview($id,$house)
 		{
+<<<<<<< HEAD
 			$sql ="select r.*, i.username from Review r, IndividualUser i where r.belongTo = ? and r.postBy = i.id";
 			$query = $this->db->query($sql,$id);
+=======
+			$query = $this->db->get_where('Review',array("belongsTo"=>$house));
+>>>>>>> 59e3c2893e722f5377849de796a6052273c4dd87
 			return $query->result_array();
 		}
 		public function createReview($id,$house)
@@ -39,7 +43,7 @@
 			'belongsTo' => $house,
 			'description'=> $this->input->post('description')
 			);
-			
+
 			$this->db->insert('Review', $data);
 		}
 		public function editReview($id, $house){
@@ -48,7 +52,7 @@
 			'belongsTo' => $house,
 			'description'=> $this->input->post('description')
 			);
-			
+
 			$this->db->replace('Review', $data);
 		}
 		public function deleteReview($id,$house)

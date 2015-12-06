@@ -165,4 +165,12 @@
           }
         }
 
+        public function changeViewMode() {
+            $id = $_SESSION['id'];
+            $viewPreference = $_SESSION['viewPreference'];
+            $this->IndividualUser->changeViewMode($id,$viewPreference);
+            $this->session->set_userdata('viewPreference', 1-$viewPreference);
+            redirect('main');
+        }
+
     }

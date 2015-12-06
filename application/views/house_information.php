@@ -36,7 +36,7 @@
 <img src="<?php
       if(file_exists('images/'. $houseInformation_item['largeImage'])){
         echo '/images/'. $houseInformation_item['largeImage'];
-      }?>" />
+      }?>" height="300" width="300"/>
 
 <p></p>
 <button>
@@ -53,7 +53,7 @@
 </button>
 
 <?php
-  if($sellerInformation['id'] == $_SESSION['id']){
+  if($sellerInformation['id'] == $_SESSION['id'] || $_SESSION['usertype'] == 4){
     $url = site_url('HouseInformation/editPost/'.$houseInformation_item['id']);
     echo '<button> <a href="'.$url.'"> Edit House Information</a> </button>';
 
@@ -79,5 +79,12 @@
 
 <hr />
 <b> <?php echo 'REVIEWS'.'<br />';?></b>
+<?php foreach ($reviewInfo as $review_item):
+        echo ' posted by: '.$review_item['postedBy'].', description: '.$review_item['description'].'<br />';
+        if( $_SESSION['id'] == $review_item['postedBy'] || $_SESSION['usertype'] == 4){
+          $url = site_url('Review/edit/'.$houseInformation_item['id']);
+          echo '<a href="'.$url.'"> Edit Review</a> ';
+        }
+      endforeach; ?>
 
 <hr />

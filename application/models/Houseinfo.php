@@ -160,7 +160,8 @@ class Houseinfo extends CI_Model {
         'brNumber' => $this->input->post('brNumber'),
         'price' => $this->input->post('price'),
         'description' => $this->input->post('description'),
-        'updateTime' => date("Y/m/d")
+        'updateTime' => date("Y/m/d"),
+        'verified' => 0
       );
       $this->db->where('id',$id);
       return $query = $this->db->update('HouseInformation', $data);

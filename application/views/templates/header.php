@@ -31,7 +31,7 @@
     <ul class="nav nav-pills">
         <?php
             $url = site_url("main");
-            echo '<li role="presentation" class="active"><a href="'.$url.'">Home</a></li>';
+            echo '<li role="presentation"><a href="'.$url.'">Home</a></li>';
 
             if (! isset($_SESSION['login'])) {
                 $url = site_url('login');
@@ -52,6 +52,10 @@
                         $url = site_url("UserInformation/registerCorporate");
                         echo '<li><a href = "'.$url.'">Corporate Application</a></li>';
                     }
+                    echo '<li role="separator" class="divider"></li>';
+                    echo '<li role="presentation">
+                                <a href="UserInformation/changeViewMode">
+                                Change View Mode</a></li>';
                     echo '<li role="separator" class="divider"></li>';
                     $url = site_url("Email");
                     echo '<li><a href="'.$url.'">My Emails</a></li>';
@@ -82,7 +86,14 @@
             }
             IF (isset($_SESSION['login'])) {
                 $url = site_url('HouseInformation/newPost');
-                echo '<li role="presentation"><a href="'.$url.'">New Post</a></li>';
+                echo '<li role="presentation" class="active"><a href="'.$url.'">New Post</a></li>';
               }
         ?>
     </ul>
+
+    <script type="text/javascript">
+        function changeView() {
+            window.location.assign("UserInformation/changeViewMode");
+        }
+        </script>
+
