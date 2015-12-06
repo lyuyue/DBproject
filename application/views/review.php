@@ -21,20 +21,10 @@
         function () {
             $('#review').DataTable({
                 "sAjaxSource": "myReviews",
-                "aoColumnDefs":
+                "aoColumns":
                     [
-                        { 
-                        	'aTargets':[1],
-                        	'mData': 'belongsTo',
-                        	"mReander":function (data,type,full)
-                        	{
-                        		url=<?php echo "'".site_url("Review/edit")."/'"; ?>;
-                        		return "<a href='" + url + data +"'>" + data + "</a>";
-                        		
-                        	} },
-                        { 
-                        	'aTargets':[2],
-                        	'mData': 'description' },
+                        { 'mData': 'belongsTo' },
+                        { 'mData': 'description' },
                     ]
             });
         }

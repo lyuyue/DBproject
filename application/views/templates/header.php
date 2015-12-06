@@ -86,8 +86,9 @@
             }
             IF (isset($_SESSION['login'])) {
                 $url = site_url('HouseInformation/newPost');
-                echo '<li role="presentation" class="active"><a href="'.$url.'">New Post</a></li>';
+                echo '<li role="presentation"><a href="'.$url.'">New Post</a></li>';
               }
+
         ?>
     </ul>
 
@@ -96,4 +97,3 @@
             window.location.assign("UserInformation/changeViewMode");
         }
         </script>
-

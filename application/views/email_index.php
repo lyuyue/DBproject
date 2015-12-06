@@ -23,3 +23,7 @@
 	</tr>
 <?php endforeach ?>
 </table>
+
+<button>
+	<a href = "Email/create">Create a New Email</a>
+</button>
