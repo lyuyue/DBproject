@@ -7,8 +7,8 @@ class Emailinfo extends CI_Model{
 	}
 	public function getEmaillist($id)
 	{
-			$sql = "select e.*, r.receivedBy, r.readStatus from Email AS e, ReadStatus AS r where r.receive=e.id and e.sentBy = ?";
-			$query = $this->db->query($sql, $id);			
+			$sql = "select e.*, r.receivedBy, r.readStatus from Email AS e, ReadStatus AS r where r.receive=e.id and e.sentBy = ? or r.receivedBy = ?";
+			$query = $this->db->query($sql, array($id,$id));			
 			return $query->result_array();
 	}
 	public function getEmailDetail($id)
