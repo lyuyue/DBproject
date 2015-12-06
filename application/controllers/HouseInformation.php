@@ -25,17 +25,25 @@ class HouseInformation extends CI_Controller {
         }
         $data['id'] = $id;
         $data['houseInformation_item'] = $this->Houseinfo->getHouseInformation($id);
-        $data['title'] = "House Information";
-        $data['msg'] = $msg;
 
-        $data['tagStatistics'] = $this->Houseinfo->getTagStatistics($id);
-        $data['sellerInformation'] = $this->Houseinfo->getSellerInformation($id);
-        $data['corpInformation'] = $this->Houseinfo->getCorpInformation($id);
-        $data['reviewInfo'] = $this->ReviewInfo->getHouseReview($id);
+        if($data['houseInformation_item']['verified'] == 0){
+          $this->load->view('templates/header');
+          $this->load->view('wait_for_approval');
+          $this->load->view('templates/footer');
+        }
+        else{
+          $data['title'] = "House Information";
+          $data['msg'] = $msg;
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('house_information', $data);
-        $this->load->view('templates/footer');
+          $data['tagStatistics'] = $this->Houseinfo->getTagStatistics($id);
+          $data['sellerInformation'] = $this->Houseinfo->getSellerInformation($id);
+          $data['corpInformation'] = $this->Houseinfo->getCorpInformation($id);
+          $data['reviewInfo'] = $this->ReviewInfo->getHouseReview($id);
+
+          $this->load->view('templates/header', $data);
+          $this->load->view('house_information', $data);
+          $this->load->view('templates/footer');
+        }
     }
 
     public function viewMyPosts() {
@@ -74,8 +82,7 @@ class HouseInformation extends CI_Controller {
           }
           else
           { $id=$this->Houseinfo->newPost($_SESSION['id']);
-            $msg = "New a post successfully. Wait for the approval of administrator.";
-            $this->newPost($msg);
+            $this->uploadImage($id);
           }
     }
 
