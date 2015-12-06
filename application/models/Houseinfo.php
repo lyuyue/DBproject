@@ -128,9 +128,6 @@ class Houseinfo extends CI_Model {
       $data = array('topPost' => 1);
       $this->db->where('id',$id);
       $query = $this->db->update('HouseInformation', $data);
-
-      $query = $this->db->get_where('HouseInformation', array('topPost' => 1));
-      return $query->result_array();
     }
 
     public function unverifiedPost() {

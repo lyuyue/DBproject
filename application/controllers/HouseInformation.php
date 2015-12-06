@@ -125,13 +125,9 @@ class HouseInformation extends CI_Controller {
     # set post $id as pin
     # need to check whether user is admin, need to check the row num of results
     public function setPin($id) {
-      $data['id'] = $id;
-      $data['pinPost'] = $this->Houseinfo->setPin($id);
-      $data['title'] = "Pin Posts";
+      $this->Houseinfo->setPin($id);
 
-      $this->load->view('templates/header', $data);
-      $this->load->view('main', $data);
-      $this->load->view('templates/footer');
+      redirect('Main/allPosts');
     }
 
     public function unverifiedPost() {
