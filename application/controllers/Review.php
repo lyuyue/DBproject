@@ -13,6 +13,7 @@
             $this->load->database();
             $this->load->library('session');
             $this->load->model('ReviewInfo');
+			$this->load->model('IndividualUser');
         }
 
         public function showMyReviews() {
@@ -33,6 +34,8 @@
 			$data['title'] = 'Create a news reviews';
 			$data['user']=$_SESSION['id'];
 			$data['house']=$id;
+			$query=$this->IndividualUser->getProfile($_SESSION['id']);
+			$data['name']=$query['username'];
 	
 			$this->form_validation->set_rules('description','Review Content','required');
 	
@@ -46,11 +49,14 @@
 			else {
 				if($this->ReviewInfo->getMyReview($data['user'],$data['house'])->num_rows()>0)
 				{
-					echo "Review already exists~!0_o~~";
+				$data['title'] = "Review already exists~!0_o~~";
+				$this->load->view('templates/header', $data);
+				$this->load->view('create_review', $data);
+				$this->load->view('templates/footer', $data);
 				}
 				else{
-				echo "Review created succesfully~!! :)";
 				$this->ReviewInfo->createReview($data['user'], $data['house']);
+				redirect('HouseInformation/view'."/".$id);
 			}
 			}
 		}
@@ -62,6 +68,8 @@
 			$data['title'] = 'Create a news reviews';
 			$data['user']=$_SESSION['id'];
 			$data['house']=$id;
+			$data['name'] = $this->IndividualUser->getProfile($_SESSION['id']);
+			
 	
 			$this->form_validation->set_rules('description','Review Content','required');
 	
@@ -75,6 +83,7 @@
 			}
 			else {
 				$this->ReviewInfo->editReview($data['user'], $data['house']);
+				redirect('HouseInformation/view'."/".$id);
 			}
 		}
 		public function delete($id)
@@ -92,6 +101,7 @@
 			}
 			else {
 			$this->ReviewInfo->deleteReview($data['user'],$data['house']);
+			redirect('HouseInformation/view'."/".$id);
 			}
 		}
 		

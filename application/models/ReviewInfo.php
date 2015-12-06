@@ -29,7 +29,7 @@
 		public function getHouseReview($house)
 		{
 
-			$sql ="select r.*, i.username from Review r, IndividualUser i where r.belongsTo = ? and r.postedBy = i.id";
+			$sql ="select r.*, i.username from Review r JOIN IndividualUser i  ON r.postedBy = i.id WHERE r.belongsTo = ?";
 			$query = $this->db->query($sql,$house);
 			
 			return $query->result_array();

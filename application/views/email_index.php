@@ -10,11 +10,11 @@
 <?php foreach ($emailInformation as $emailInformation_item): ?>
 	<tr>
 	<td><a href="Email/view/<?php echo $emailInformation_item['id'] ?>">View Detail</a></td>
-	<td><?php echo $emailInformation_item['sentBy'] ?></td>
+	<td><?php echo $emailInformation_item['sender'] ?></td>
 	<td><?php echo $emailInformation_item['title'] ?></td>
-	<td><?php echo $emailInformation_item['receivedBy'] ?></td>
+	<td><?php echo $emailInformation_item['receiver'] ?></td>
 	<td><?php echo $emailInformation_item['sendTime'] ?></td>
-	<td><?php if ($emailInformation_item['readStatus'] =0)
+	<td><?php if ($emailInformation_item['readStatus'] ==0)
 		{
 			echo "Unread";
 		}

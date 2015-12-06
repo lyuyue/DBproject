@@ -102,8 +102,9 @@ class Houseinfo extends CI_Model {
 
     # get statistics of a tag
     public function getTagStatistics($id) {
-    $query = $this->db->get_where('TagStatistics', array('usedBy' => $id));
-    return $query->result_array();
+    	$sql = "select * from Tag JOIN TagStatistics ON Tag.id=TagStatistics.tagId WHERE TagStatistics.usedBy=?";
+		$query = $this->db->query($sql,$id);
+		return $query->result_array();
     }
 
     # add view times of post $id

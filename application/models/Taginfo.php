@@ -31,11 +31,13 @@ class Taginfo extends CI_Model{
 	public function addTag($house,$tag)
 	{
 		$query = $this->db->get_where('TagStatistics',array('usedBy'=>$house,'tagId'=>$tag));
-		if($query)
+		$record = $query->num_rows();
+		if($record > 0)
 		{
 		$counts = $query->row()->counts;
 		$data = array(
 		'counts'=>$counts + 1);
+		
 		$this->db->update('TagStatistics',$data,array('usedBy'=>$house,'tagId'=>$tag));
 		}
 		else
@@ -45,7 +47,8 @@ class Taginfo extends CI_Model{
 				'tagId'=>$tag,
 				'counts'=> 1
 				);
-				$this->db->insert('TagStatistcs',$data);
+				$this->db->insert('TagStatistics',$data);
+				
 				
 			}
 	}

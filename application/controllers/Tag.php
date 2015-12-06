@@ -19,12 +19,11 @@ class Tag extends CI_Controller
 		$this->load->view('tag_information');
 		$this->load->view('templates/footer', $data);	
 	}
-	public function create()
+	public function create($house)
 	{
 	
 	$data['title'] = 'Create a new tag';
-
-	
+	$data['house'] = $house;	
 	$this->form_validation->set_rules('description','Tag Name','required');
 	
 	if ($this->form_validation->run()==FALSE)
@@ -46,6 +45,7 @@ class Tag extends CI_Controller
 		else{
 		echo "Tag create succesfully~!0_o~~";
 		$this->Taginfo->creatTag();
+		redirect('Tag/addTag'."/".$house);
 		}
 	}
 	}
@@ -59,9 +59,9 @@ class Tag extends CI_Controller
 		
 		if($selection)
 		{
-			echo "Succesfully added tag to the house :)";
+			
 			$this->Taginfo->addTag($house,$selection);
-			redirect('HouseInformation/view/1');
+			redirect('HouseInformation/view/'.$house);
 		}
 		else
 		{

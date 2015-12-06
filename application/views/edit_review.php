@@ -1,5 +1,5 @@
 <h2>Edit a review item</h2>
-<?php echo "Current User ID: ".$user.'<br />'.'<br />';
+<?php echo "Current User Name: ".$name['username'].'<br />'.'<br />';
 echo "Current House ID: ".$house.'<br />'.'<br />';
 ?>
 </php echo validation_errors();?>

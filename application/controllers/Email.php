@@ -14,12 +14,14 @@ class Email extends CI_Controller
 		$data['emailInformation']=$this->Emailinfo->getEmailList($_SESSION['id']);
 		$data['title']="Email List";
 		
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('email_index', $data);
 		$this->load->view('templates/footer', $data);
 	}
 	public function view ($id)
 	{
+		$this->Emailinfo->update_status($id,$_SESSION['id']);
 		$data['emailDetail']=$this->Emailinfo->getEmailDetail($id);
 		$data['title']="Email Detail";
 		
@@ -50,7 +52,7 @@ class Email extends CI_Controller
 	}
 	else {
 		$this->Emailinfo->createEmail($_SESSION['id']);
-		echo "Email succesfully created!~~~";
+		redirect('Email/');
 	}
 	}
 	public function unread()

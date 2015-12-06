@@ -69,12 +69,12 @@
 </button>
 
 <button>
-<a href="<?php echo site_url('Tag/create'); ?>">Add Tag To The Tag Library</a>
+<a href="<?php echo site_url('Tag/create'."/".$houseInformation_item['id']); ?>">Add Tag To The Tag Library</a>
 </button>
 <hr />
 <b> <?php echo 'TAGS'.'<br />';?></b>
 <?php foreach ($tagStatistics as $ts_item):
-        echo ' tag: '.$ts_item['tagId'].', counts: '.$ts_item['counts'].'<br />';
+        echo ' tag: '.$ts_item['description'].', counts: '.$ts_item['counts'].'<br />';
       endforeach; ?>
 
 <hr />
