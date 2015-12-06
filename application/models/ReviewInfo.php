@@ -26,14 +26,12 @@
 			$sql = "select Review.description from Review where postedBy = ? AND belongsTo = ? ";
 			return $this->db->query($sql, array($id,$house));
 		}
-		public function getHouseReview($id,$house)
+		public function getHouseReview($house)
 		{
-<<<<<<< HEAD
-			$sql ="select r.*, i.username from Review r, IndividualUser i where r.belongTo = ? and r.postBy = i.id";
-			$query = $this->db->query($sql,$id);
-=======
-			$query = $this->db->get_where('Review',array("belongsTo"=>$house));
->>>>>>> 59e3c2893e722f5377849de796a6052273c4dd87
+
+			$sql ="select r.*, i.username from Review r, IndividualUser i where r.belongsTo = ? and r.postedBy = i.id";
+			$query = $this->db->query($sql,$house);
+			
 			return $query->result_array();
 		}
 		public function createReview($id,$house)
