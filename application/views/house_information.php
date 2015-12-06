@@ -81,6 +81,10 @@
 <b> <?php echo 'REVIEWS'.'<br />';?></b>
 <?php foreach ($reviewInfo as $review_item):
         echo ' posted by: '.$review_item['postedBy'].', description: '.$review_item['description'].'<br />';
+        if( $_SESSION['id'] == $review_item['postedBy']){
+          $url = site_url('Review/edit/'.$houseInformation_item['id']);
+          echo '<a href="'.$url.'"> Edit Review</a> ';
+        }
       endforeach; ?>
 
 <hr />
