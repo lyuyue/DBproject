@@ -41,7 +41,7 @@ class Houseinfo extends CI_Model {
         'brNumber' => $this->input->post('brNumber'),
         'price' => $this->input->post('price'),
         'description' => $this->input->post('description'),
-        'verified' => 0,
+        'verified' => 1,
         'postTime' => date("Y/m/d"),
         'deleteStatus' => 0,
         'topPost' => 0,
@@ -53,24 +53,16 @@ class Houseinfo extends CI_Model {
       return $this->db->insert_id();
     }
 
-    public function updateImage($id,$image){
-      $data = array('largeImage' => $image,'listImage' => 'list_'.$image);
+    # $type: 1- large image, 2- list image
+    public function updateImage($id,$image,$type){
+      if($type == 1){
+      $data = array('largeImage' => $image);
+      }
+      else{
+        $data = array('listImage' => $image);
+      }
       $this->db->where('id',$id);
       $query = $this->db->update('HouseInformation', $data);
-
-      # create a list image
-      $config['image_library'] = 'gd2';
-      $config['source_image'] = 'images/'.$image;
-      $config['new_image'] = 'images/list_'.$image;
-      $config['maintain_ratio'] = TRUE;
-      $config['width']     = 75;
-      $config['height']   = 50;
-
-      $this->load->library('image_lib', $config);
-      $this->image_lib->resize();
-
-      $query = $this->db->get_where('HouseInformation', array('id' => $id));
-      return $query->row_array();
     }
 
     # delete post $id
@@ -128,9 +120,6 @@ class Houseinfo extends CI_Model {
       $data = array('topPost' => 1);
       $this->db->where('id',$id);
       $query = $this->db->update('HouseInformation', $data);
-
-      $query = $this->db->get_where('HouseInformation', array('topPost' => 1));
-      return $query->result_array();
     }
 
     public function unverifiedPost() {
