@@ -34,8 +34,7 @@
 			$data['title'] = 'Create a news reviews';
 			$data['user']=$_SESSION['id'];
 			$data['house']=$id;
-			$query=$this->IndividualUser->getProfile($_SESSION['id']);
-			$data['name']=$query['username'];
+			$data['name'] = $this->IndividualUser->getProfile($_SESSION['id']);
 	
 			$this->form_validation->set_rules('description','Review Content','required');
 	
