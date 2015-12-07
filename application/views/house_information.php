@@ -53,15 +53,17 @@
 </button>
 
 <?php
-  if($sellerInformation['id'] == $_SESSION['id'] || $_SESSION['usertype'] == 4){
-    $url = site_url('HouseInformation/editPost/'.$houseInformation_item['id']);
-    echo '<button> <a href="'.$url.'"> Edit House Information</a> </button>';
+  if(isset($_SESSION['login']){
+    if($sellerInformation['id'] == $_SESSION['id'] || $_SESSION['usertype'] == 4){
+      $url = site_url('HouseInformation/editPost/'.$houseInformation_item['id']);
+      echo '<button> <a href="'.$url.'"> Edit House Information</a> </button>';
 
-    $url = site_url('HouseInformation/deletePost/'.$houseInformation_item['id']);
-    echo '<button> <a href="'.$url.'"> Delete House Information</a> </button>';
+      $url = site_url('HouseInformation/deletePost/'.$houseInformation_item['id']);
+      echo '<button> <a href="'.$url.'"> Delete House Information</a> </button>';
 
-    $url = site_url('HouseInformation/setPin/'.$houseInformation_item['id']);
-    echo '<button> <a href="'.$url.'"> Set Pin</a> </button>';
+      $url = site_url('HouseInformation/setPin/'.$houseInformation_item['id']);
+      echo '<button> <a href="'.$url.'"> Set Pin</a> </button>';
+    }
   }
 ?>
 <button>
@@ -81,7 +83,8 @@
 <b> <?php echo 'REVIEWS'.'<br />';?></b>
 <?php foreach ($reviewInfo as $review_item):
         echo ' posted by: '.$review_item['username'].', description: '.$review_item['description'].'<br />';
-        if( $_SESSION['id'] == $review_item['postedBy'] || $_SESSION['usertype'] == 4){
+        if(isset($_SESSION['login']){
+          if( $_SESSION['id'] == $review_item['postedBy'] || $_SESSION['usertype'] == 4){
           $url = site_url('Review/edit/'.$houseInformation_item['id']);
           echo '<a href="'.$url.'"> Edit Review</a> ';
 
@@ -91,6 +94,7 @@
           echo '<a href="'.$url.'"> Delete Review</a> ';
 
           echo '<br />';
+          }
         }
       endforeach; ?>
 
