@@ -98,14 +98,14 @@ class Emailinfo extends CI_Model{
 	}
 
 	public function setPinNotification($userid,$id) {
-		$emailid = $this->pinNotification($userid,$id);
-		$this->addReadStatus($emailid, $id);
+		$emailid = $this->pinNotification($id);
+		$this->addReadStatus($emailid, $userid);
 	}
-	public function pinNotification($userid,$postid) {
+	public function pinNotification($postid) {
 		$this->db->insert(
 			"Email",
 			array(
-				'sentBy' => $userid,
+				'sentBy' => $_SESSION['id'],
 				'title' => 'Post is set pin',
 				'sendTime' => date("Y-m-d"),
 				'content' => 'Your post'.$postid.' is been set pin.'
