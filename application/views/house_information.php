@@ -35,8 +35,8 @@
 ?>
 <img src="<?php
       if(file_exists('images/'. $houseInformation_item['largeImage'])){
-        echo '/images/'. $houseInformation_item['largeImage'];
-      }?>" height="300" width="300"/>
+        echo '/images/'. $houseInformation_item['largeImage'].' height="300" width="300"';
+      }?>"/>
 
 <p></p>
 
