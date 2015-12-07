@@ -1,5 +1,6 @@
 <?php
 echo "House Id: ".$house.'<br />'.'<br />';
+echo "Tag From Tag Library:";
 ?>
 <?php echo form_open('Tag/addTag'."/".$house)?>
 <select name='selection'>
