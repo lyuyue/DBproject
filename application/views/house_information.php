@@ -39,38 +39,39 @@
       }?>" height="300" width="300"/>
 
 <p></p>
-<button>
-  <a href="<?php echo site_url("UserInformation/rateUser/".$sellerInformation['id']); ?>"
-    >Rate Seller</a>
-</button>
-<button>
-  <a href="<?php echo site_url("HouseInformation/houseRating/".$houseInformation_item['id']); ?>"
-    >Rate House</a>
-</button>
-<button>
-  <a href="<?php echo site_url("Review/create/".$houseInformation_item['id']); ?>"
-    >Add Review</a>
-</button>
 
 <?php
-  if($sellerInformation['id'] == $_SESSION['id'] || $_SESSION['usertype'] == 4){
-    $url = site_url('HouseInformation/editPost/'.$houseInformation_item['id']);
-    echo '<button> <a href="'.$url.'"> Edit House Information</a> </button>';
+  if(isset($_SESSION['login'])){
 
-    $url = site_url('HouseInformation/deletePost/'.$houseInformation_item['id']);
-    echo '<button> <a href="'.$url.'"> Delete House Information</a> </button>';
+    $url = site_url("UserInformation/rateUser/".$sellerInformation['id']);
+    echo '<button> <a href="'.$url.'"> Rate Seller</a> </button>';
 
-    $url = site_url('HouseInformation/setPin/'.$houseInformation_item['id']);
-    echo '<button> <a href="'.$url.'"> Set Pin</a> </button>';
+    $url = site_url("HouseInformation/houseRating/".$houseInformation_item['id']);
+    echo '<button> <a href="'.$url.'"> Rate House</a> </button>';
+
+    $url = site_url("Review/create/".$houseInformation_item['id']);
+    echo '<button> <a href="'.$url.'"> Add Review</a> </button>';
+
+    if($sellerInformation['id'] == $_SESSION['id'] || $_SESSION['usertype'] == 4){
+      $url = site_url('HouseInformation/editPost/'.$houseInformation_item['id']);
+      echo '<button> <a href="'.$url.'"> Edit House Information</a> </button>';
+
+      $url = site_url('HouseInformation/deletePost/'.$houseInformation_item['id']);
+      echo '<button> <a href="'.$url.'"> Delete House Information</a> </button>';
+
+      $url = site_url('HouseInformation/setPin/'.$houseInformation_item['id']);
+      echo '<button> <a href="'.$url.'"> Set Pin</a> </button>';
+    }
+
+    $url = site_url('Tag/addTag'."/".$houseInformation_item['id']);
+    echo '<button> <a href="'.$url.'"> Add Tag To The House</a> </button>';
+
+    $url = site_url('Tag/create'."/".$houseInformation_item['id']);
+    echo '<button> <a href="'.$url.'"> Add Tag To The Tag Library</a> </button>';
+
   }
 ?>
-<button>
-<a href="<?php echo site_url('Tag/addTag'."/".$houseInformation_item['id']); ?>">Add Tag To The House</a>
-</button>
 
-<button>
-<a href="<?php echo site_url('Tag/create'."/".$houseInformation_item['id']); ?>">Add Tag To The Tag Library</a>
-</button>
 <hr />
 <b> <?php echo 'TAGS'.'<br />';?></b>
 <?php foreach ($tagStatistics as $ts_item):
@@ -81,7 +82,8 @@
 <b> <?php echo 'REVIEWS'.'<br />';?></b>
 <?php foreach ($reviewInfo as $review_item):
         echo ' posted by: '.$review_item['username'].', description: '.$review_item['description'].'<br />';
-        if( $_SESSION['id'] == $review_item['postedBy'] || $_SESSION['usertype'] == 4){
+        if(isset($_SESSION['login'])){
+          if( $_SESSION['id'] == $review_item['postedBy'] || $_SESSION['usertype'] == 4){
           $url = site_url('Review/edit/'.$houseInformation_item['id']);
           echo '<a href="'.$url.'"> Edit Review</a> ';
 
@@ -91,6 +93,7 @@
           echo '<a href="'.$url.'"> Delete Review</a> ';
 
           echo '<br />';
+          }
         }
       endforeach; ?>
 
