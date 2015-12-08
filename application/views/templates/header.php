@@ -79,6 +79,9 @@
 
                 $url = site_url("HouseInformation/verifyAllPost");
                 echo '<li><a href="'.$url.'">Verify Post</a></li>';
+                echo '<li role="separator" class="divider"></li>';
+                $url = site_url('Email/sendNotification');
+                echo '<li><a href="'.$url.'">Send Notification</a></li>';
 
                 echo '</ul>
                 </li>';

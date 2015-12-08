@@ -75,4 +75,20 @@ class Email extends CI_Controller
 				return FALSE;
 			}
 	}
+
+	public function sendNotification() {
+		$data['title'] = "Send Notification";
+		$this->load->view('templates/header', $data);
+		$this->load->view('send_notification');
+		$this->load->view('templates/footer');
+	}
+
+	public function notificationSubmit() {
+		$title = $_POST['title'];
+		$content = $_POST['content'];
+
+		$this->Emailinfo->addNotification($title, $content);
+
+		redirect('/email');
+	}
 }

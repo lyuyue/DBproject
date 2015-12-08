@@ -127,4 +127,27 @@ class Emailinfo extends CI_Model{
 		);
 		echo 1;
 	}
+
+	public function addNotification($title, $content) {
+		$data = array(
+			'sentBy' => $_SESSION['id'],
+			'title' => $title,
+			'sendTime' => date('Y-m-d'),
+			'content' => $content
+		);
+
+		$this->db->insert('Email',$data);
+		$emailId = $this->db->insert_id();
+		
+		$sql = "select id from IndividualUser";
+		$rows = $this->db->query($sql)->result_array();
+		foreach ($rows as $row) {
+			$data = array (
+				'receive' => $emailId,
+				'receivedBy' => $row['id'],
+				'readStatus' => 0);
+			$this->db->insert('ReadStatus',$data);
+		}
+
+	}
 }
