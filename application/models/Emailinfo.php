@@ -138,7 +138,7 @@ class Emailinfo extends CI_Model{
 
 		$this->db->insert('Email',$data);
 		$emailId = $this->db->insert_id();
-		
+
 		$sql = "select id from IndividualUser";
 		$rows = $this->db->query($sql)->result_array();
 		foreach ($rows as $row) {

@@ -7,7 +7,7 @@
  */
 ?>
 
-<?php echo form_open('Email/sendNotification')?>
+<?php echo form_open('Email/notificationSubmit')?>
 
 <label for="title">Title</label>
 <input type="input" name="title"/><br />

@@ -87,6 +87,7 @@ class Email extends CI_Controller
 		$title = $_POST['title'];
 		$content = $_POST['content'];
 
+
 		$this->Emailinfo->addNotification($title, $content);
 
 		redirect('/email');
