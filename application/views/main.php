@@ -28,7 +28,6 @@
         function () {
             $('#postList').DataTable({
                 "sAjaxSource": "main/allPosts",
-                "bSort": false,
                 "aoColumnDefs":
                     [
                         {

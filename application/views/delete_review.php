@@ -1,5 +1,5 @@
 <?php
-echo 'Are you sure to delete this post ?'.'<br />';
+echo 'Are you sure to delete this review?'.'<br />';
 ?>
 
 <button>

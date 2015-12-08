@@ -19,5 +19,5 @@ echo $title.'<br />';
         description: <input type="text" name="description" id="description" value="<?php echo $post['description']; ?>" size=20>
         type name(1-apartment,2-house): <input type="number" name="typeName" id="typeName" value="<?php echo $post['typeName']; ?>" size=20>
 
-        <input type="submit" name="btnNew" class="btn" value = "Update">
+        <input type="submit" name="btnNew" class="btn" value = "Finish">
     </form>
