@@ -85,23 +85,24 @@
 				redirect('HouseInformation/view'."/".$id);
 			}
 		}
-		public function delete($id)
+		public function delete($id,$user)
 		{
-			$data['title']="Delete Review";
-			$data['user']=$_SESSION['id'];
-			$data['house']=$id;
-			$data['content']=$this->ReviewInfo->getMyReview($data['user'],$data['house']);
 			
-			if ($this->form_validation->run()==FALSE)
-			{	
-				$this->load->view('templates/header', $data);
-				$this->load->view('delete_review', $data);
-				$this->load->view('templates/footer');
-			}
-			else {
-			$this->ReviewInfo->deleteReview($data['user'],$data['house']);
-			redirect('HouseInformation/view'."/".$id);
-			}
+			$data['title'] = "Delete Review";
+			$data['user'] = $user;
+			$data['house'] = $id;
+			$query = $this->db->get_where('Review',array('postedBy'=>$user,'belongsTo'=>$id));
+			$data['review'] = $query->result_array();
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('delete_review', $data);
+			$this->load->view('templates/footer');
+			
 		}
-		
-    }
+		public function submitDelete($id,$user)
+		{
+			$this->ReviewInfo->deleteReview($user,$id);
+			redirect('HouseInformation/view'."/".$id);
+		}
+
+}

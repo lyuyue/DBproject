@@ -1,9 +1,12 @@
 <?php
-echo $user;
-echo $house;
-echo $content;
+echo 'Are you sure to delete this post ?'.'<br />';
 ?>
 
-    <?php echo form_open("Review/delete/", $house); ?>
-        <input type="submit" name="submitn" value = "Delete">
-    </form>
+<button>
+  <a href="<?php echo site_url("Review/submitDelete/".$house."/".$user); ?>"
+    >Yes</a>
+</button>
+<button>
+  <a href="<?php echo site_url("HouseInformation/view/".$house); ?>"
+    >No</a>
+</button>
