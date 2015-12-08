@@ -19,10 +19,10 @@ class Email extends CI_Controller
 		$this->load->view('email_index', $data);
 		$this->load->view('templates/footer', $data);
 	}
-	public function view ($id)
+	public function view ($id,$user)
 	{
 		$this->Emailinfo->update_status($id,$_SESSION['id']);
-		$data['emailDetail']=$this->Emailinfo->getEmailDetail($id);
+		$data['emailDetail']=$this->Emailinfo->getEmailDetail($id,$user);
 		$data['title']="Email Detail";
 		
 		$this->load->view('templates/header', $data);

@@ -7,7 +7,7 @@ class Emailinfo extends CI_Model{
 	}
 	public function getEmaillist($id)
 	{
-		$sql = "select e.id, e.sendTime, e.content,e.title, iu.username as sender, ir.username as receiver, r.readStatus
+		$sql = "select e.id, e.sendTime, e.content,e.title, ir.id as receiverId, iu.username as sender, ir.username as receiver, r.readStatus
 					from
 					IndividualUser ir
 					RIGHT JOIN
@@ -21,9 +21,9 @@ class Emailinfo extends CI_Model{
 			$query = $this->db->query($sql, array($id,$id));
 			return $query->result_array();
 	}
-	public function getEmailDetail($id)
+	public function getEmailDetail($id,$user)
 	{
-		$sql = "select e.id, e.sendTime, e.content,e.title, iu.username as sender, ir.username as receiver, r.readStatus
+		$sql = "select e.id, e.sendTime, e.content,e.title, ir.id as receiverId, iu.username as sender, ir.username as receiver, r.readStatus
 				from
 				IndividualUser ir
 				RIGHT JOIN
@@ -32,8 +32,8 @@ class Emailinfo extends CI_Model{
 				ReadStatus AS r INNER JOIN Email AS e  ON e.id=r.receive
 				ON  iu.id=e.sentBy
 				ON  ir.id=r.receivedBy
-				WHERE e.id= ?";
-		$query = $this->db->query($sql, $id);
+				WHERE e.id= ? AND r.receivedBy =?";
+		$query = $this->db->query($sql, array($id,$user));
 		return $query->result_array();
 	}
 	public function createEmail($id)
