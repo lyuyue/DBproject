@@ -36,7 +36,7 @@ class Emailinfo extends CI_Model{
 		$query = $this->db->query($sql, array($id,$user));
 		return $query->result_array();
 	}
-	public function createEmail($id)
+	public function createEmail($id,$id1)
 	{
 		$data = array(
 		'sentBy' => $id,
@@ -50,7 +50,7 @@ class Emailinfo extends CI_Model{
 
 		$data = array (
 		'receive' => $emailId,
-		'receivedBy' => $this->input->post('sendTo'),
+		'receivedBy' => $id1,
 		'readStatus' => 0);
 
 
@@ -58,9 +58,9 @@ class Emailinfo extends CI_Model{
 
 
 	}
-	public function receiver($id)
+	public function receiver($name)
 	{
-		$query = $this->db->get_where('IndividualUser', array('id' => $id));
+		$query = $this->db->get_where('IndividualUser', array('username' => $name));
 		return $query->num_rows();
 	}
 	public function unreadEmail($id)
