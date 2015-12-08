@@ -16,7 +16,8 @@ class Houseinfo extends CI_Model {
     {
         if ($id === 0)
         {
-            $query = $this->db->get_where('HouseInformation',array('verified' => 1));
+            $sql = "select * from HouseInformation where verified = 1 order by topPost DESC, id DESC ";
+            $query = $this->db->query($sql);
             return json_encode(array("data" => $query->result()));
         }
 

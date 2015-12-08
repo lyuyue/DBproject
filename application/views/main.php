@@ -10,6 +10,7 @@
 <table id="postList" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
+        <th> </th>
         <th>Id</th>
         <th>Image</th>
         <th>Location</th>
@@ -27,10 +28,19 @@
         function () {
             $('#postList').DataTable({
                 "sAjaxSource": "main/allPosts",
+                "bSort": false,
                 "aoColumnDefs":
                     [
                         {
                             'aTargets': [0],
+                            'mData': 'topPost',
+                            "mRender" : function (data, type, full) {
+                                if (data == 1) {return "<span class='glyphicon glyphicon-star'></span>";}
+                                    else {return "<span></span>";}
+                            }
+                        },
+                        {
+                            'aTargets': [1],
                             'mData': 'id',
                             "mRender" : function (data, type, full) {
                                 url = <?php echo "'".site_url("HouseInformation/view")."/'"; ?>;
@@ -38,7 +48,7 @@
                             }
                         },
                         {
-                            'aTargets': [1],
+                            'aTargets': [2],
                             'mData':
                             <?php
                                 if (isset($_SESSION['viewPreference']) && ($_SESSION['viewPreference'] ==1)) {
@@ -51,22 +61,22 @@
                             }
                         },
                         {
-                            'aTargets': [2],
+                            'aTargets': [3],
                             'mData': 'location' },
                         {
-                            'aTargets': [3],
+                            'aTargets': [4],
                             'mData': 'buildYear' },
                         {
-                            'aTargets': [4],
+                            'aTargets': [5],
                             'mData': 'brNumber' },
                         {
-                            'aTargets': [5],
+                            'aTargets': [6],
                             'mData': 'price' },
                         {
-                            'aTargets': [6],
+                            'aTargets': [7],
                             'mData': 'viewTimes' },
                         {
-                            'aTargets': [7],
+                            'aTargets': [8],
                             'mData': 'averageRating' },
                     ]
             });
