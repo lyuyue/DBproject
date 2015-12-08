@@ -93,7 +93,7 @@
 
           echo "  ";
 
-          $url = site_url('Review/delete/'.$houseInformation_item['id']);
+          $url = site_url('Review/delete/'.$houseInformation_item['id']."/".$review_item['postedBy']);
           echo '<a href="'.$url.'"> Delete Review</a> ';
 
           echo '<br />';
